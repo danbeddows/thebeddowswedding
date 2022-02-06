@@ -1,6 +1,6 @@
 # The Beddows Wedding Website
 
-A small website for guests to see detailed information they'll need for the our day.
+A small website for guests to see detailed information they'll need for our day.
 
 See it live at [thebeddowswedding.com](https://www.thebeddowswedding.com).
 
