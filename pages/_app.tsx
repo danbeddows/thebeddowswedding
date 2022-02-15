@@ -20,6 +20,10 @@ const FontEuphoriaStyle = fontEuphoria(assetDomain);
 const FontNowStyle = fontNow(assetDomain);
 
 const GlobalStyles = createGlobalStyle`
+	html, body {
+		height: 100%;
+	}
+
   body {
 		padding: 0;
 		margin: 0;
@@ -29,6 +33,10 @@ const GlobalStyles = createGlobalStyle`
 
 	* {
 		box-sizing: border-box;
+	}
+
+	#__next {
+		height: 100%;
 	}
 `;
 
