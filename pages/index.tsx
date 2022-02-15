@@ -8,7 +8,6 @@ import {
 const Index = () => {
   return (
     <PageWrapper>
-      {" "}
       <MarriedNames>
         Natalie
         <br />+<br />
