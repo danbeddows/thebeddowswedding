@@ -10,7 +10,7 @@ const fontNowStyle = (assetDomain: string) => {
 
 		@font-face {
 			font-family: "now";
-			src: url("${assetDomain}/font/now-regular.ttf") format("opentype");
+			src: url("${assetDomain}/font/now-regular.otf") format("opentype");
 			font-weight: 400;
 			font-style: normal;
 			font-display: fallback;
