@@ -1,21 +1,10 @@
-import {
-  MarriedDate,
-  MarriedNames,
-  MarriedSubtext,
-  PageWrapper,
-} from "./index.styles";
+import Header from "src/components/Header";
 
 const Index = () => {
   return (
-    <PageWrapper>
-      <MarriedNames>
-        Natalie
-        <br />+<br />
-        Dan
-      </MarriedNames>
-      <MarriedSubtext>Are Getting Married</MarriedSubtext>
-      <MarriedDate>2023</MarriedDate>
-    </PageWrapper>
+    <>
+      <Header />
+    </>
   );
 };
 
