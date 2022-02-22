@@ -67,12 +67,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:title" content={aboutTitle} />
         <meta property="og:image" content={aboutImgUrl} />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={aboutTitle} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={aboutTitle} />
         <meta property="twitter:domain" content={aboutDomain} />
         <meta property="twitter:url" content={aboutUrl} />
-        <meta name="twitter:description" content={aboutDescription} />
-        <meta name="twitter:image" content={aboutImgUrl} />
+        <meta property="twitter:description" content={aboutDescription} />
+        <meta property="twitter:image" content={aboutImgUrl} />
       </Head>
       <GlobalStyles />
       <ThemeGlobals />
