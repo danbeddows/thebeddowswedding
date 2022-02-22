@@ -7,7 +7,8 @@ import {
   InfoWrapper,
   LinkWrapper,
   OurNames,
-} from "./header.styles";
+} from "./Header.styles";
+
 interface HeaderLinkProps {
   url: string;
   label: string;
@@ -34,9 +35,9 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <InfoWrapper>
-        <OurNames>Natalie & Dan</OurNames>
+        <OurNames>Natalie &amp; Dan</OurNames>
         <InfoSubtext>
-          22nd April 2023 | The Holford Estate, Knutsford
+          22nd April 2023 &#8901; The Holford Estate, Knutsford
           <br />
           {message}
         </InfoSubtext>
@@ -44,7 +45,7 @@ const Header = () => {
       <LinkWrapper>
         <HeaderLink url={"/"} label={"Home"} />
         <HeaderLink url={"/venue"} label={"Venue"} />
-        <HeaderLink url={"/contact"} label={"Contact"} />
+        <HeaderLink url={"/message"} label={"Message Us"} />
       </LinkWrapper>
     </HeaderWrapper>
   );

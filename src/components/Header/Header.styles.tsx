@@ -1,8 +1,9 @@
+import { rem } from "polished";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
   max-width: 1120px;
-  margin: 30px auto 50px;
+  margin: ${rem(30)} auto ${rem(50)};
 `;
 
 const InfoWrapper = styled.div`
@@ -14,15 +15,17 @@ const InfoWrapper = styled.div`
 
 const OurNames = styled.h2`
   font-family: "euphoria";
-  font-size: 54px;
+  font-size: ${rem(54)};
   margin: 0;
 `;
 
 const InfoSubtext = styled.h4`
-  margin: 20px 0 0;
+  margin: ${rem(10)} 0 0;
   text-align: center;
   letter-spacing: 1px;
-  line-height: 24px;
+  line-height: ${rem(24)};
+  text-transform: uppercase;
+  font-size: ${rem(14)};
 `;
 
 const LinkWrapper = styled.div`
@@ -30,14 +33,14 @@ const LinkWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: ${rem(40)};
 `;
 
 const HeaderLinkStyle = styled.a`
   text-decoration: none;
   color: #000;
-  margin: 0 16px;
-  font-size: 18px;
+  margin: 0 ${rem(16)};
+  font-size: ${rem(18)};
 `;
 
 export {
