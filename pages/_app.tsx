@@ -44,7 +44,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const aboutTitle = "The Beddows Wedding";
   const aboutDomain = "thebeddowswedding.com";
   const aboutUrl = `https://www.${aboutDomain}`;
-  const aboutDescription = "";
+  const aboutDescription = "Natalie & Dan are getting married in 2023 🎉";
+  const aboutImgUrl = `${process.env.NEXT_PUBLIC_ASSET_SERVER}/img/og.png`;
 
   return (
     <>
@@ -64,14 +65,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content={aboutTitle} />
         <meta property="og:description" content={aboutDescription} />
         <meta property="og:title" content={aboutTitle} />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content={aboutImgUrl} />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={aboutTitle} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={aboutTitle} />
         <meta property="twitter:domain" content={aboutDomain} />
         <meta property="twitter:url" content={aboutUrl} />
-        <meta name="twitter:description" content={aboutDescription} />
-        <meta name="twitter:image" content="" />
+        <meta property="twitter:description" content={aboutDescription} />
+        <meta property="twitter:image" content={aboutImgUrl} />
       </Head>
       <GlobalStyles />
       <ThemeGlobals />
