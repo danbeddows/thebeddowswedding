@@ -1,5 +1,5 @@
 import { rem } from "polished";
-import { Theme } from "src/common/themes/global";
+import { Theme } from "src/styles/global";
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
