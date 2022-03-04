@@ -1,6 +1,7 @@
 import { differenceInCalendarDays } from "date-fns";
 import Link from "next/link";
 import {
+  DaysToGo,
   HeaderLinkStyle,
   HeaderWrapper,
   InfoSubtext,
@@ -38,8 +39,7 @@ const Header = () => {
         <OurNames>Natalie &amp; Dan</OurNames>
         <InfoSubtext>
           22nd April 2023 &#8901; The Holford Estate, Knutsford
-          <br />
-          {message}
+          <DaysToGo>{message}</DaysToGo>
         </InfoSubtext>
       </InfoWrapper>
       <LinkWrapper>

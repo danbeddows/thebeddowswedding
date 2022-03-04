@@ -6,6 +6,7 @@ interface InputProps {
   label: string;
   placeholder?: string;
   onChange: (newValue: string) => void;
+  style?: {};
 }
 
 const Input: React.FC<InputProps> = ({
@@ -13,6 +14,7 @@ const Input: React.FC<InputProps> = ({
   label,
   placeholder,
   onChange,
+  style,
 }) => {
   const [value, setValue] = useState("");
 
@@ -31,6 +33,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        style={style}
       />
     </StyledLabel>
   );

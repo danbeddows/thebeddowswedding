@@ -26,6 +26,12 @@ const InfoSubtext = styled.h4`
   line-height: ${rem(24)};
   text-transform: uppercase;
   font-size: ${rem(14)};
+  font-weight: 500;
+`;
+
+const DaysToGo = styled.div`
+  font-weight: 300;
+  font-weight: 400;
 `;
 
 const LinkWrapper = styled.div`
@@ -41,6 +47,7 @@ const HeaderLinkStyle = styled.a`
   color: #000;
   margin: 0 ${rem(16)};
   font-size: ${rem(18)};
+  font-weight: 500;
 `;
 
 export {
@@ -50,4 +57,5 @@ export {
   InfoWrapper,
   OurNames,
   InfoSubtext,
+  DaysToGo,
 };

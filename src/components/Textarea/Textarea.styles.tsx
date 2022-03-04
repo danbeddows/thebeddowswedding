@@ -9,7 +9,7 @@ const StyledLabel = styled.label`
   }
 `;
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   margin: 3px 0 5px;
   font-size: ${rem(16)};
   letter-spacing: ${rem(-0.5)};
@@ -18,6 +18,7 @@ const StyledInput = styled.input`
   outline: none;
   border: 1px solid #000;
   border-radius: 5px;
+  min-width: ${rem(240)};
 
   &::placeholder {
     color: #9c9c9c;
@@ -26,4 +27,4 @@ const StyledInput = styled.input`
   }
 `;
 
-export { StyledLabel, StyledInput };
+export { StyledLabel, StyledTextarea };
