@@ -22,12 +22,10 @@ const Button: React.FC<ButtonProps> = ({ label, isLoading = false }) => {
   }, [isLoading]);
 
   return (
-    <>
-      <StyledButton type="button" disabled={isDisabled}>
-        {isLoading && <>loading</>}
-        {!isLoading && label}
-      </StyledButton>
-    </>
+    <StyledButton type="button" disabled={isDisabled}>
+      {isLoading && <>loading</>}
+      {!isLoading && label}
+    </StyledButton>
   );
 };
 

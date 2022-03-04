@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "src/components/Button";
 import Header from "src/components/Header";
 import Input from "src/components/Input";
+import PageHeading from "src/components/PageHeading/PageHeading";
 import Textarea from "src/components/Textarea";
 import { MessageContainer } from "./message.styles";
 
@@ -15,6 +16,7 @@ const Message = () => {
     <>
       <Header />
       <MessageContainer>
+        <PageHeading>Message us</PageHeading>
         <Input
           type="text"
           label="Your name"
@@ -41,7 +43,7 @@ const Message = () => {
           placeholder="Enter your message"
           style={{ minWidth: rem(460), minHeight: rem(240) }}
         />
-        <Button label="Submit" isLoading={true} />
+        <Button label="Submit" isLoading={false} />
       </MessageContainer>
     </>
   );

@@ -2,9 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 const ThemeGlobals = createGlobalStyle`
 	:root {
-		--dark-blue: #293462;
-		--light-blue: #2873a9;
-		--coral: #ff5757;
+		--dark-blue: #2c497f;
+		--light-blue: #7e9cbf;
+		--green: #9fbfB0;
+		--black: #000000;
+		--white: #ffffff;
 	}
 `;
 

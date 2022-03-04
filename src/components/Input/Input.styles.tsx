@@ -2,7 +2,7 @@ import { rem } from "polished";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`
-  > * {
+  > div {
     font-size: 20px;
     font-weight: 500;
     letter-spacing: ${rem(-1)};
