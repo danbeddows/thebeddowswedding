@@ -13,14 +13,18 @@ const InfoWrapper = styled.div`
   justify-content: center;
 `;
 
-const OurNames = styled.h2`
+const OurNames = styled.a`
   font-family: "euphoria";
-  font-size: ${rem(54)};
+  font-size: ${rem(48)};
   margin: 0;
+  text-decoration: none;
+  color: #000;
 `;
 
 const InfoSubtext = styled.h4`
-  margin: ${rem(10)} 0 0;
+  margin: ${rem(10)} 0 20px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 20px;
   text-align: center;
   letter-spacing: 1px;
   line-height: ${rem(24)};
@@ -39,15 +43,19 @@ const LinkWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: ${rem(40)};
 `;
 
-const HeaderLinkStyle = styled.a`
+interface HeaderLinkProps {
+  selected?: boolean;
+}
+const HeaderLinkStyle = styled.a<HeaderLinkProps>`
   text-decoration: none;
-  color: #000;
+
   margin: 0 ${rem(16)};
   font-size: ${rem(18)};
   font-weight: 500;
+
+  color: ${(props) => (props.selected ? "var(--green)" : "#000")};
 `;
 
 export {
