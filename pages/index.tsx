@@ -14,7 +14,7 @@ const Index = () => {
         Dan
       </MarriedNames>
       <MarriedSubtext>Are Getting Married</MarriedSubtext>
-      <MarriedDate>2023</MarriedDate>
+      <MarriedDate>22nd April 2023</MarriedDate>
     </PageWrapper>
   );
 };

@@ -36,19 +36,19 @@ const MarriedSubtext = styled.h2`
   font-weight: 400;
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    font-size: ${rem(30)};
+    font-size: ${rem(26)};
     margin: ${rem(40)} 0 0;
   }
 `;
 
 const MarriedDate = styled.div`
-  font-size: ${rem(14)};
+  font-size: ${rem(18)};
   margin: ${rem(6)} 0 0;
   text-transform: uppercase;
   font-weight: 400;
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    font-size: ${rem(22)};
+    font-size: ${rem(26)};
     margin: ${rem(10)} 0 0;
   }
 `;
