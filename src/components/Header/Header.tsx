@@ -1,6 +1,7 @@
 import { differenceInCalendarDays } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import {
   DaysToGo,
   HeaderLinkStyle,
@@ -12,6 +13,12 @@ import {
 } from "./Header.styles";
 
 interface HeaderLinkProps {
+  url: string;
+  label: string;
+  selected?: boolean;
+}
+
+interface HeaderLinkType {
   url: string;
   label: string;
   selected?: boolean;
@@ -29,28 +36,31 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({
   );
 };
 
-const getHeaderLinks = (route: string) => {
-  const links = [
+const Header = () => {
+  const router = useRouter();
+
+  const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
     { url: "/", label: "Home" },
     { url: "/venue", label: "Venue" },
     { url: "/message", label: "Message Us" },
-  ];
+  ]);
 
-  return links.map((link) => {
-    const hightlightMatch = link.url.replaceAll("/", "/");
-    const highlightRegex = new RegExp(`^${hightlightMatch}$`, "g");
+  // Check for URL change, and reevaluate selected header link
+  useEffect(() => {
+    setHeaderLinks(
+      headerLinks.map((link) => {
+        const highlightRegex = new RegExp(`^${link.url}$`, "g");
 
-    let selected = false;
-    if (highlightRegex.exec(route)) {
-      selected = true;
-    }
+        delete link.selected;
 
-    return <HeaderLink url={link.url} label={link.label} selected={selected} />;
-  });
-};
+        if (highlightRegex.exec(router.pathname)) {
+          return { ...link, selected: true };
+        }
 
-const Header = () => {
-  const router = useRouter();
+        return link;
+      })
+    );
+  }, [router.pathname]);
 
   const numDays = differenceInCalendarDays(new Date("2023/04/22"), Date.now());
   let message = `${numDays} ${numDays > 1 ? "days" : "day"} to go.`;
@@ -72,7 +82,16 @@ const Header = () => {
           <DaysToGo>{message}</DaysToGo>
         </InfoSubtext>
       </InfoWrapper>
-      <LinkWrapper>{getHeaderLinks(router.pathname)}</LinkWrapper>
+      <LinkWrapper>
+        {headerLinks.map((link, index) => (
+          <HeaderLink
+            url={link.url}
+            label={link.label}
+            selected={link.selected}
+            index={index}
+          />
+        ))}
+      </LinkWrapper>
     </HeaderWrapper>
   );
 };
