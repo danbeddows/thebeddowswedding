@@ -12,19 +12,13 @@ import {
   OurNames,
 } from "./Header.styles";
 
-interface HeaderLinkProps {
-  url: string;
-  label: string;
-  selected?: boolean;
-}
-
 interface HeaderLinkType {
   url: string;
   label: string;
   selected?: boolean;
 }
 
-const HeaderLink: React.FC<HeaderLinkProps> = ({
+const HeaderLink: React.FC<HeaderLinkType> = ({
   url,
   label,
   selected = false,
@@ -88,7 +82,7 @@ const Header = () => {
             url={link.url}
             label={link.label}
             selected={link.selected}
-            index={index}
+            key={index}
           />
         ))}
       </LinkWrapper>
