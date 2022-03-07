@@ -1,4 +1,4 @@
-import { rem } from "polished";
+import { cssVar, lighten, rem } from "polished";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
@@ -48,14 +48,18 @@ const LinkWrapper = styled.div`
 interface HeaderLinkProps {
   selected?: boolean;
 }
+const headerLinkColour = String(cssVar("--green", "#9fbfB0"));
 const HeaderLinkStyle = styled.a<HeaderLinkProps>`
   text-decoration: none;
-
   margin: 0 ${rem(16)};
   font-size: ${rem(18)};
   font-weight: 500;
-
   color: ${(props) => (props.selected ? "var(--green)" : "#000")};
+  transition: 0.1s color;
+
+  &:hover {
+    color: ${lighten(0.1, headerLinkColour)};
+  }
 `;
 
 export {
