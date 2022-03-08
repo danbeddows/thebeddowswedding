@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import StyledButton from "./Button.styles";
 
 interface ButtonProps {
-  label: string;
   isLoading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, isLoading = false }) => {
+const Button: React.FC<ButtonProps> = ({ children, isLoading = false }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const evaluateIsDisabled = () => {
@@ -24,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({ label, isLoading = false }) => {
   return (
     <StyledButton type="button" disabled={isDisabled}>
       {isLoading && <>loading</>}
-      {!isLoading && label}
+      {!isLoading && children}
     </StyledButton>
   );
 };

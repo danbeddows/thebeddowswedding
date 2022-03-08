@@ -1,5 +1,7 @@
 import { rem } from "polished";
 import { Theme } from "src/common/themes/global";
+import Button from "src/components/Button";
+import Input from "src/components/Input";
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
@@ -53,4 +55,26 @@ const MarriedDate = styled.div`
   }
 `;
 
-export { PageWrapper, MarriedNames, MarriedSubtext, MarriedDate };
+const SubscribeWrapper = styled.div`
+  margin-top: ${rem(30)};
+`;
+const SubscribeText = styled.div``;
+const SubscribeForm = styled.div`
+  margin-top: ${rem(4)};
+`;
+const SubscribeInput = styled(Input)`
+  margin-right: ${rem(8)};
+`;
+const SubscribeSubmit = styled(Button)``;
+
+export {
+  PageWrapper,
+  MarriedNames,
+  MarriedSubtext,
+  MarriedDate,
+  SubscribeWrapper,
+  SubscribeText,
+  SubscribeForm,
+  SubscribeInput,
+  SubscribeSubmit,
+};
