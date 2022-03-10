@@ -1,3 +1,4 @@
+import { faFaceSmileHearts } from "@fortawesome/pro-light-svg-icons";
 import { faCheck } from "@fortawesome/pro-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -48,7 +49,7 @@ const Subscribe = () => {
         return (
           <SubscribeWrapper>
             <SubscribeText>
-              Enter email to subscribe to important wedding updates
+              Enter your email address for updates on our wedding!
             </SubscribeText>
             <SubscribeForm>
               <SubscribeInput
