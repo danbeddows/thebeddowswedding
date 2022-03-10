@@ -18,8 +18,8 @@ const Button: React.FC<ButtonProps> = ({
   const btnRef = createRef<HTMLButtonElement>();
   const [isDisabled, setIsDisabled] = useState(false);
   const [content, setContent] = useState(children);
-  const [width, setWidth] = useState<"auto" | number>("auto");
-  const [prevWidth, setPrevWidth] = useState("");
+  const [width, setWidth] = useState<"auto" | number | string>("auto");
+  const [prevWidth, setPrevWidth] = useState<"auto" | number | string>("auto");
 
   const handleOnClick = () => {
     onClick();
