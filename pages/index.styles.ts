@@ -55,26 +55,4 @@ const MarriedDate = styled.div`
   }
 `;
 
-const SubscribeWrapper = styled.div`
-  margin-top: ${rem(30)};
-`;
-const SubscribeText = styled.div``;
-const SubscribeForm = styled.div`
-  margin-top: ${rem(4)};
-`;
-const SubscribeInput = styled(Input)`
-  margin-right: ${rem(8)};
-`;
-const SubscribeSubmit = styled(Button)``;
-
-export {
-  PageWrapper,
-  MarriedNames,
-  MarriedSubtext,
-  MarriedDate,
-  SubscribeWrapper,
-  SubscribeText,
-  SubscribeForm,
-  SubscribeInput,
-  SubscribeSubmit,
-};
+export { PageWrapper, MarriedNames, MarriedSubtext, MarriedDate };

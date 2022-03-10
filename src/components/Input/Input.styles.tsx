@@ -2,6 +2,9 @@ import { rem } from "polished";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`
+  width: 100%;
+  display: block;
+
   > div {
     font-size: 20px;
     font-weight: 500;
