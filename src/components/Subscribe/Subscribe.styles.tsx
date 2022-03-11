@@ -18,7 +18,13 @@ const SubscribeWrapper = styled.div`
   }
 `;
 
-const SubscribeText = styled.div``;
+const SubscribeText = styled.div`
+  text-align: right;
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    text-align: left;
+  }
+`;
 
 const SubscribeForm = styled.div`
   margin-top: ${rem(4)};
