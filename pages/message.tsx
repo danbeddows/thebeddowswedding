@@ -12,6 +12,8 @@ const Message = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
+  const handleSubmit = () => {};
+
   return (
     <>
       <Header />
@@ -43,7 +45,9 @@ const Message = () => {
           placeholder="Enter your message"
           style={{ minWidth: rem(460), minHeight: rem(240) }}
         />
-        <Button label="Submit" isLoading={false} />
+        <Button isLoading={false} onClick={handleSubmit}>
+          Submit
+        </Button>
       </MessageContainer>
     </>
   );
