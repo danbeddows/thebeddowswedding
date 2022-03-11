@@ -15,15 +15,29 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   className = "",
 }) => {
-  const btnRef = createRef<HTMLButtonElement>();
+  const btnRef = useRef<HTMLButtonElement>(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const [content, setContent] = useState(children);
-  const [width, setWidth] = useState<"auto" | number | string>("auto");
-  const [prevWidth, setPrevWidth] = useState<"auto" | number | string>("auto");
+  const [width, setWidth] = useState<"auto" | number | string>(-1);
 
-  const handleOnClick = () => {
+  const getBtnWidth = () => {
+    if (!btnRef || !btnRef.current) {
+      return "auto";
+    }
+
+    const styles = window.getComputedStyle(btnRef.current);
+    return styles.width !== null ? styles.width : "auto";
+  };
+
+  const [prevWidth, setPrevWidth] = useState<"auto" | number | string>(-1);
+
+  const handleClick = () => {
     onClick();
   };
+
+  useEffect(() => {
+    setPrevWidth(getBtnWidth());
+  }, [btnRef]);
 
   // When loading state changes, reevaluate the button content
   // If showing the spinner, record the btn width so there's no layout shift
@@ -31,14 +45,7 @@ const Button: React.FC<ButtonProps> = ({
     if (isLoading) {
       // If btn is rendered, set the width before we change the content
       if (btnRef.current) {
-        const styles = window.getComputedStyle(btnRef.current);
-
-        if (styles.width !== null) {
-          setPrevWidth(styles.width);
-        } else {
-          setPrevWidth("auto");
-        }
-
+        setPrevWidth(getBtnWidth());
         setWidth(btnRef.current.offsetWidth);
       }
 
@@ -47,7 +54,9 @@ const Button: React.FC<ButtonProps> = ({
 
       setIsDisabled(true);
     } else {
-      setWidth(prevWidth);
+      if (prevWidth !== -1) {
+        setWidth(prevWidth);
+      }
       setContent(children);
       setIsDisabled(false);
     }
@@ -58,7 +67,7 @@ const Button: React.FC<ButtonProps> = ({
       ref={btnRef}
       type="button"
       disabled={isDisabled}
-      onClick={handleOnClick}
+      onClick={handleClick}
       style={{ width }}
       className={className}
     >
