@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { StyledInput, StyledLabel } from "./Input.styles";
+import {
+  InputContainer,
+  StyledError,
+  StyledInput,
+  StyledLabel,
+} from "./Input.styles";
 
 interface InputProps {
   type?: "text";
@@ -9,6 +14,7 @@ interface InputProps {
   style?: {};
   value?: string;
   className?: string;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -19,6 +25,7 @@ const Input: React.FC<InputProps> = ({
   style,
   value = "",
   className = "",
+  error = "",
 }) => {
   const [internalValue, setInternalValue] = useState("");
 
@@ -34,17 +41,20 @@ const Input: React.FC<InputProps> = ({
   }, [value]);
 
   return (
-    <StyledLabel>
-      <div>{label}</div>
-      <StyledInput
-        type={type}
-        value={internalValue}
-        onChange={handleChange}
-        placeholder={placeholder}
-        style={style}
-        className={className}
-      />
-    </StyledLabel>
+    <InputContainer>
+      <StyledLabel>
+        <div>{label}</div>
+        <StyledInput
+          type={type}
+          value={internalValue}
+          onChange={handleChange}
+          placeholder={placeholder}
+          style={style}
+          className={className}
+        />
+      </StyledLabel>
+      <StyledError>{error}</StyledError>
+    </InputContainer>
   );
 };
 

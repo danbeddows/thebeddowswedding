@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { StyledLabel, StyledTextarea } from "./Textarea.styles";
+import {
+  StyledError,
+  StyledLabel,
+  StyledTextarea,
+  TextareaContainer,
+} from "./Textarea.styles";
 
 interface TextareaProps {
   label: string;
   placeholder?: string;
   onChange: (newValue: string) => void;
   style?: {};
+  error?: string;
 }
 
 const Input: React.FC<TextareaProps> = ({
@@ -13,6 +19,7 @@ const Input: React.FC<TextareaProps> = ({
   placeholder,
   onChange,
   style,
+  error = "",
 }) => {
   const [value, setValue] = useState("");
 
@@ -24,7 +31,7 @@ const Input: React.FC<TextareaProps> = ({
   };
 
   return (
-    <>
+    <TextareaContainer>
       <StyledLabel>
         <div>{label}</div>
         <StyledTextarea
@@ -33,7 +40,8 @@ const Input: React.FC<TextareaProps> = ({
           style={style}
         ></StyledTextarea>
       </StyledLabel>
-    </>
+      <StyledError>{error}</StyledError>
+    </TextareaContainer>
   );
 };
 

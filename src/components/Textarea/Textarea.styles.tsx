@@ -1,6 +1,8 @@
 import { rem } from "polished";
 import styled from "styled-components";
 
+const TextareaContainer = styled.div``;
+
 const StyledLabel = styled.label`
   > div {
     font-size: 20px;
@@ -27,4 +29,11 @@ const StyledTextarea = styled.textarea`
   }
 `;
 
-export { StyledLabel, StyledTextarea };
+const StyledError = styled.div`
+  color: #ff0033;
+  font-size: ${rem(13)};
+  padding: ${rem(4)} 4px;
+  font-weight: 500;
+`;
+
+export { TextareaContainer, StyledLabel, StyledTextarea, StyledError };

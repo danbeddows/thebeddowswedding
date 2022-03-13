@@ -1,6 +1,8 @@
 import { rem } from "polished";
 import styled from "styled-components";
 
+const InputContainer = styled.div``;
+
 const StyledLabel = styled.label`
   width: 100%;
   display: block;
@@ -29,4 +31,11 @@ const StyledInput = styled.input`
   }
 `;
 
-export { StyledLabel, StyledInput };
+const StyledError = styled.div`
+  color: #ff0033;
+  font-size: ${rem(13)};
+  padding: ${rem(4)} 4px;
+  font-weight: 500;
+`;
+
+export { InputContainer, StyledLabel, StyledInput, StyledError };

@@ -7,12 +7,54 @@ import PageHeading from "src/components/PageHeading/PageHeading";
 import Textarea from "src/components/Textarea";
 import { MessageContainer } from "./message.styles";
 
+type MessageErrorType = "name" | "email" | "message";
+interface MessageError {
+  type: MessageErrorType;
+  description: string;
+}
+
 const Message = () => {
   const [name, setName] = useState("");
-  const [subject, setSubject] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<MessageError[]>([]);
 
-  const handleSubmit = () => {};
+  const getFormError = (type: MessageErrorType) => {
+    const errors = formErrors.filter((err) => err.type == type);
+
+    if (errors.length > 0) {
+      return errors[0].description;
+    }
+
+    return "";
+  };
+
+  const handleSubmit = () => {
+    const errors: MessageError[] = [];
+
+    // Validate input
+    if (name == "") {
+      errors.push({ type: "name", description: "Enter your name" });
+    }
+
+    if (emailAddress == "") {
+      errors.push({
+        type: "email",
+        description: "Enter your email address",
+      });
+    }
+
+    if (message == "") {
+      errors.push({ type: "message", description: "Enter your message" });
+    }
+
+    if (errors.length == 0) {
+      setIsSubmitting(true);
+    } else {
+      setFormErrors(errors);
+    }
+  };
 
   return (
     <>
@@ -27,15 +69,17 @@ const Message = () => {
           }}
           placeholder="Enter your name"
           style={{ minWidth: rem(280) }}
+          error={getFormError("name")}
         />
         <Input
           type="text"
-          label="Subject"
+          label="Email Address"
           onChange={(val: string) => {
-            setSubject(val);
+            setEmailAddress(val);
           }}
-          placeholder="Enter subject"
+          placeholder="Enter your email address"
           style={{ minWidth: rem(460) }}
+          error={getFormError("email")}
         />
         <Textarea
           label="Message"
@@ -44,8 +88,9 @@ const Message = () => {
           }}
           placeholder="Enter your message"
           style={{ minWidth: rem(460), minHeight: rem(240) }}
+          error={getFormError("message")}
         />
-        <Button isLoading={false} onClick={handleSubmit}>
+        <Button isLoading={isSubmitting} onClick={handleSubmit}>
           Submit
         </Button>
       </MessageContainer>
