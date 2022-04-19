@@ -17,7 +17,6 @@ const Index = () => {
       </MarriedNames>
       <MarriedSubtext>Are Getting Married</MarriedSubtext>
       <MarriedDate>22nd April 2023</MarriedDate>
-      <Subscribe />
     </PageWrapper>
   );
 };
