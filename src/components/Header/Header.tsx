@@ -1,11 +1,16 @@
+import { faBars } from "@fortawesome/pro-light-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
+  DesktopLinkWrapper,
   HeaderLinkStyle,
   HeaderWrapper,
   InfoWrapper,
-  LinkWrapper,
+  MobileLinks,
+  MobileLinkWrapper,
+  MobileMenuButtonContainer,
   OurNames,
 } from "./Header.styles";
 
@@ -38,6 +43,11 @@ const Header = () => {
     { url: "/message", label: "Message Us" },
   ]);
 
+  const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);
+  const onMobileMenuClick = () => {
+    setIsMobileLinksVisible((isVisible) => !isVisible);
+  };
+
   // Check for URL change, and reevaluate selected header link
   useEffect(() => {
     setHeaderLinks(
@@ -62,7 +72,7 @@ const Header = () => {
           <OurNames>Natalie &amp; Dan</OurNames>
         </Link>
       </InfoWrapper>
-      <LinkWrapper>
+      <DesktopLinkWrapper>
         {headerLinks.map((link, index) => (
           <HeaderLink
             url={link.url}
@@ -71,7 +81,22 @@ const Header = () => {
             key={index}
           />
         ))}
-      </LinkWrapper>
+      </DesktopLinkWrapper>
+      <MobileLinkWrapper>
+        <MobileMenuButtonContainer onClick={onMobileMenuClick}>
+          <FontAwesomeIcon icon={faBars} size={"2x"} />
+        </MobileMenuButtonContainer>
+        <MobileLinks visible={isMobileLinksVisible}>
+          {headerLinks.map((link, index) => (
+            <HeaderLink
+              url={link.url}
+              label={link.label}
+              selected={link.selected}
+              key={index}
+            />
+          ))}
+        </MobileLinks>
+      </MobileLinkWrapper>
     </HeaderWrapper>
   );
 };
