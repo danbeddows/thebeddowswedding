@@ -2,6 +2,34 @@ import { rem } from "polished";
 import { Theme } from "src/styles/global";
 import styled from "styled-components";
 
+const WelcomeTile = styled.section`
+  width: 100%;
+  height: 100vh;
+  background: transparent url("/img/pages/landing/welcomeBg.jpg") no-repeat left
+    center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+`;
+
+const InfoSubtext = styled.h4`
+  margin: ${rem(10)} 0 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: ${rem(24)};
+  text-transform: uppercase;
+  font-size: ${rem(14)};
+  font-weight: 500;
+`;
+
+const DaysToGo = styled.div`
+  font-weight: 300;
+  font-weight: 400;
+`;
+
 const PageWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -12,7 +40,6 @@ const PageWrapper = styled.div`
   padding-right: ${rem(20)};
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    padding-right: ${rem(40)};
   }
 `;
 
@@ -53,4 +80,12 @@ const MarriedDate = styled.div`
   }
 `;
 
-export { PageWrapper, MarriedNames, MarriedSubtext, MarriedDate };
+export {
+  PageWrapper,
+  MarriedNames,
+  MarriedSubtext,
+  MarriedDate,
+  WelcomeTile,
+  InfoSubtext,
+  DaysToGo,
+};

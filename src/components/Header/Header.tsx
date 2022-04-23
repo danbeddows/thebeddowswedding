@@ -1,12 +1,9 @@
-import { differenceInCalendarDays } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {
-  DaysToGo,
   HeaderLinkStyle,
   HeaderWrapper,
-  InfoSubtext,
   InfoWrapper,
   LinkWrapper,
   OurNames,
@@ -36,6 +33,8 @@ const Header = () => {
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
     { url: "/", label: "Home" },
     { url: "/venue", label: "Venue" },
+    { url: "/accommodation", label: "Accommodation" },
+    { url: "/gifts", label: "Gifts" },
     { url: "/message", label: "Message Us" },
   ]);
 
@@ -56,25 +55,12 @@ const Header = () => {
     );
   }, [router.pathname]);
 
-  const numDays = differenceInCalendarDays(new Date("2023/04/22"), Date.now());
-  let message = `${numDays} ${numDays > 1 ? "days" : "day"} to go.`;
-
-  if (numDays == 0) {
-    message = "The wedding is TODAY!";
-  } else if (numDays < 0) {
-    message = `${-numDays} ${-numDays > 1 ? "days" : "day"} since the wedding.`;
-  }
-
   return (
     <HeaderWrapper>
       <InfoWrapper>
         <Link href="/" passHref={true}>
           <OurNames>Natalie &amp; Dan</OurNames>
         </Link>
-        <InfoSubtext>
-          22nd April 2023 &#8901; The Holford Estate, Knutsford
-          <DaysToGo>{message}</DaysToGo>
-        </InfoSubtext>
       </InfoWrapper>
       <LinkWrapper>
         {headerLinks.map((link, index) => (
