@@ -4,6 +4,8 @@ import {
   DaysToGo,
   InfoSubtext,
   MarriedNames,
+  SubtextDesktop,
+  SubtextMobile,
   WelcomeTile,
 } from "./index.styles";
 
@@ -27,7 +29,14 @@ const Index = () => {
           Dan
         </MarriedNames>
         <InfoSubtext>
-          22nd April 2023 | The Holford Estate | Knutsford
+          <SubtextMobile>
+            22nd April 2023
+            <br />
+            The Holford Estate | Knutsford
+          </SubtextMobile>
+          <SubtextDesktop>
+            22nd April 2023 | The Holford Estate | Knutsford
+          </SubtextDesktop>
           <DaysToGo>{message}</DaysToGo>
         </InfoSubtext>
       </WelcomeTile>
