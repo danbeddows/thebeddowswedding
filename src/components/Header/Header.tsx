@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useWindowDimensions from "src/hooks/useWindowDimensions";
 import {
   DesktopLinkWrapper,
   HeaderLinkStyle,
@@ -38,6 +39,9 @@ const HeaderLink: React.FC<HeaderLinkType> = ({
 
 const Header = () => {
   const router = useRouter();
+  const windowDimensions = useWindowDimensions();
+
+  const showLogo = !(windowDimensions.width > 768 && router.pathname === "/");
 
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
     { url: "/", label: "Home" },
@@ -77,7 +81,7 @@ const Header = () => {
     <HeaderWrapper>
       <InfoWrapper>
         <Link href="/" passHref={true}>
-          <OurNames>Natalie &amp; Dan</OurNames>
+          <OurNames>{showLogo ? <>Natalie &amp; Dan</> : <>&nbsp;</>}</OurNames>
         </Link>
       </InfoWrapper>
       <DesktopLinkWrapper>
