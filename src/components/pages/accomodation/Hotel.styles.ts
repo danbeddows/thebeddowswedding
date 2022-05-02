@@ -55,19 +55,32 @@ const PriceEstimateDisabled = styled.span`
 `;
 
 const ActionContainer = styled.div`
-  height: 56px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
 
   > * {
-    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
 
     &:last-child {
-      border-right: 0;
+      border-bottom: 0;
+    }
+  }
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    flex-direction: row;
+    height: 56px;
+
+    > * {
+      border-bottom: 0;
+      border-right: 1px solid #e6e6e6;
+
+      &:last-child {
+        border-right: 0;
+      }
     }
   }
 `;
@@ -78,10 +91,16 @@ const Action = styled.div`
   justify-content: center;
   flex: 1 1 0px;
   font-size: ${rem(14)};
+  width: 100%;
 
   img {
     margin-left: 3px;
     max-height: 24px;
+  }
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    width: auto;
+    height: 56px;
   }
 `;
 
@@ -103,7 +122,7 @@ const HotelLink = styled.a`
 const HotelBookingHeader = styled.div`
   background: #f5f5f5;
   text-align: center;
-  padding: 12px 0 4px;
+  padding: 20px 0 6px;
 `;
 
 const HotelBookingContainer = styled.div`
