@@ -16,6 +16,8 @@ const Theme = {
     mobileNoPx: "374",
     desktop: "769px",
     desktopNoPx: "769",
+    desktopLarge: "1440px",
+    desktopLargeNoPx: "1440",
     smallMobileHeight: "500px",
     smallMobileHeightNoPx: "500",
   },

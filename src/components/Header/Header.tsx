@@ -18,16 +18,20 @@ interface HeaderLinkType {
   url: string;
   label: string;
   selected?: boolean;
+  onClick?: () => void;
 }
 
 const HeaderLink: React.FC<HeaderLinkType> = ({
   url,
   label,
   selected = false,
+  onClick,
 }) => {
   return (
     <Link href={url} passHref={true}>
-      <HeaderLinkStyle selected={selected}>{label}</HeaderLinkStyle>
+      <HeaderLinkStyle selected={selected} onClick={onClick}>
+        {label}
+      </HeaderLinkStyle>
     </Link>
   );
 };
@@ -46,6 +50,10 @@ const Header = () => {
   const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);
   const onMobileMenuClick = () => {
     setIsMobileLinksVisible((isVisible) => !isVisible);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileLinksVisible(false);
   };
 
   // Check for URL change, and reevaluate selected header link
@@ -93,6 +101,7 @@ const Header = () => {
               label={link.label}
               selected={link.selected}
               key={index}
+              onClick={closeMobileMenu}
             />
           ))}
         </MobileLinks>

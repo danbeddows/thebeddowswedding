@@ -17,6 +17,14 @@ const WelcomeTile = styled.section`
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
+    background-position: center center;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
+    background: transparent url("/img/pages/landing/welcome-desktop.jpg")
+      no-repeat;
     background-position: left center;
     align-items: flex-end;
     justify-content: center;
