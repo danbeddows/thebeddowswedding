@@ -18,6 +18,8 @@ const Accommodation = () => {
               bookingLinks={accom.bookingLinks}
               image={accom.image}
               key={index}
+              appleMaps={accom.appleMaps}
+              googleMaps={accom.googleMaps}
             />
           ))}
         </AccomList>

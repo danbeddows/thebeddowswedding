@@ -1,6 +1,8 @@
 import { faExternalLink } from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  Action,
+  ActionContainer,
   BookingLink,
   BookingLinkContainer,
   HotelBookingContainer,
@@ -9,7 +11,6 @@ import {
   HotelHeader,
   HotelImage,
   HotelLink,
-  HotelLinkContainer,
   HotelName,
   HotelPriceEstimate,
   PriceEstimateActive,
@@ -21,7 +22,7 @@ interface BookingLink {
   url: string;
 }
 
-interface HotelProps {
+export interface HotelProps {
   name: string;
   description: string;
   priceEstimate: number;
@@ -31,6 +32,8 @@ interface HotelProps {
   };
   bookingLinks: BookingLink[];
   image: string;
+  appleMaps?: string;
+  googleMaps?: string;
 }
 
 const Hotel: React.FC<HotelProps> = ({
@@ -40,6 +43,8 @@ const Hotel: React.FC<HotelProps> = ({
   link,
   bookingLinks,
   image,
+  appleMaps,
+  googleMaps,
 }) => {
   return (
     <HotelContainer>
@@ -59,11 +64,28 @@ const Hotel: React.FC<HotelProps> = ({
         </HotelPriceEstimate>
       </HotelHeader>
       <HotelDescription>{description}</HotelDescription>
-      <HotelLinkContainer>
-        <HotelLink href={link.url} target="_blank">
-          {link.label} <FontAwesomeIcon icon={faExternalLink} />
-        </HotelLink>
-      </HotelLinkContainer>
+      <ActionContainer>
+        <Action>
+          <HotelLink href={link.url} target="_blank">
+            Website&nbsp;
+            <FontAwesomeIcon icon={faExternalLink} />
+          </HotelLink>
+        </Action>
+        {appleMaps && (
+          <Action>
+            <HotelLink href={appleMaps} target="_blank">
+              Open <img src="/img/pages/accommodation/apple-maps.jpg" />
+            </HotelLink>
+          </Action>
+        )}
+        {googleMaps && (
+          <Action>
+            <HotelLink href={googleMaps} target="_blank">
+              Open <img src="/img/pages/accommodation/google-maps.png" />
+            </HotelLink>
+          </Action>
+        )}
+      </ActionContainer>
       <HotelBookingContainer>
         {bookingLinks.map((link, index) => {
           return (

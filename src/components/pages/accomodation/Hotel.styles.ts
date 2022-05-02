@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const HotelContainer = styled.div`
   width: 100%;
-  margin: 0 10px 40px 0px;
+  margin-bottom: 60px;
   border-radius: 3px;
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
@@ -54,12 +54,38 @@ const PriceEstimateDisabled = styled.span`
   color: #ccc;
 `;
 
-const HotelLinkContainer = styled.div`
+const ActionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
+
+  > * {
+    border-right: 1px solid #e6e6e6;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+`;
+
+const Action = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0px;
+  font-size: ${rem(14)};
+
+  img {
+    margin-left: 3px;
+    max-height: 24px;
+  }
 `;
 
 const HotelLink = styled.a`
+  width: 100%;
   display: block;
   padding: 16px 18px;
   color: var(--dark-blue);
@@ -67,6 +93,10 @@ const HotelLink = styled.a`
   font-size: 14px;
   text-align: center;
   font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 const HotelBookingContainer = styled.div`
@@ -105,7 +135,8 @@ const BookingLink = styled.a`
 
 export {
   HotelContainer,
-  HotelLinkContainer,
+  ActionContainer,
+  Action,
   HotelImage,
   HotelHeader,
   HotelName,
