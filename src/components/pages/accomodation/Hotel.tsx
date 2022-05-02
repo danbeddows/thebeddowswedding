@@ -19,7 +19,7 @@ import {
 } from "./Hotel.styles";
 
 interface BookingLink {
-  type: string;
+  type: "booking.com" | "expedia" | "hotels.com";
   url: string;
 }
 
