@@ -100,13 +100,13 @@ const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   transition: 0.1s color;
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    color: ${(props) => (props.selected ? "var(--black)" : "#444")};
+    color: ${(props) => (props.selected ? "var(--dark-blue)" : "var(--black)")};
     margin: 0 ${rem(16)};
     font-size: ${rem(18)};
   }
 
   &:hover {
-    color: var(--black);
+    color: var(--dark-blue);
   }
 `;
 
