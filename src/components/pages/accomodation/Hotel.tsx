@@ -6,6 +6,7 @@ import {
   BookingLink,
   BookingLinkContainer,
   HotelBookingContainer,
+  HotelBookingHeader,
   HotelContainer,
   HotelDescription,
   HotelHeader,
@@ -86,6 +87,7 @@ const Hotel: React.FC<HotelProps> = ({
           </Action>
         )}
       </ActionContainer>
+      <HotelBookingHeader>Book on:</HotelBookingHeader>
       <HotelBookingContainer>
         {bookingLinks.map((link, index) => {
           return (

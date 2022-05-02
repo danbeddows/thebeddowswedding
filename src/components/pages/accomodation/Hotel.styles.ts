@@ -55,6 +55,7 @@ const PriceEstimateDisabled = styled.span`
 `;
 
 const ActionContainer = styled.div`
+  height: 56px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,6 +100,12 @@ const HotelLink = styled.a`
   justify-content: center;
 `;
 
+const HotelBookingHeader = styled.div`
+  background: #f5f5f5;
+  text-align: center;
+  padding: 12px 0 4px;
+`;
+
 const HotelBookingContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -137,6 +144,7 @@ export {
   HotelContainer,
   ActionContainer,
   Action,
+  HotelBookingHeader,
   HotelImage,
   HotelHeader,
   HotelName,
