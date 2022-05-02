@@ -28,7 +28,6 @@ export interface HotelProps {
   description: string;
   priceEstimate: number;
   link: {
-    label: string;
     url: string;
   };
   bookingLinks: BookingLink[];

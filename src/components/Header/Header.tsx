@@ -45,7 +45,7 @@ const Header = () => {
 
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
     { url: "/", label: "Home" },
-    { url: "/venue", label: "Venue" },
+    // { url: "/venue", label: "Venue" },
     { url: "/accommodation", label: "Accommodation" },
     // { url: "/gifts", label: "Gifts" },
     // { url: "/message", label: "Message Us" },
