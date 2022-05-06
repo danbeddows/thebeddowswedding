@@ -1,12 +1,9 @@
 import { rem } from "polished";
 import styled from "styled-components";
 
-const InputContainer = styled.div``;
+const TextareaContainer = styled.div``;
 
 const StyledLabel = styled.label`
-  width: 100%;
-  display: block;
-
   > div {
     font-size: 20px;
     font-weight: 500;
@@ -14,7 +11,7 @@ const StyledLabel = styled.label`
   }
 `;
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   margin: 3px 0 5px;
   font-size: ${rem(16)};
   letter-spacing: ${rem(-0.5)};
@@ -23,6 +20,7 @@ const StyledInput = styled.input`
   outline: none;
   border: 1px solid #000;
   border-radius: 5px;
+  min-width: ${rem(240)};
 
   &::placeholder {
     color: #9c9c9c;
@@ -38,4 +36,4 @@ const StyledError = styled.div`
   font-weight: 500;
 `;
 
-export { InputContainer, StyledLabel, StyledInput, StyledError };
+export { TextareaContainer, StyledLabel, StyledTextarea, StyledError };

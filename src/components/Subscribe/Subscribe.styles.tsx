@@ -13,18 +13,12 @@ const SubscribeWrapper = styled.div`
   margin-top: ${rem(50)};
   padding-left: ${rem(20)};
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     width: auto;
   }
 `;
 
-const SubscribeText = styled.div`
-  text-align: right;
-
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    text-align: left;
-  }
-`;
+const SubscribeText = styled.div``;
 
 const SubscribeForm = styled.div`
   margin-top: ${rem(4)};
@@ -34,7 +28,7 @@ const SubscribeForm = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     //padding-right: ${rem(40)};
     flex-direction: row;
     width: 100%;
@@ -44,7 +38,7 @@ const SubscribeForm = styled.div`
 const SubscribeInput = styled(Input)`
   width: 100%;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     width: 320px;
   }
 `;
@@ -52,7 +46,7 @@ const SubscribeInput = styled(Input)`
 const SubscribeSubmit = styled(Button)`
   width: 100%;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     margin-left: ${rem(10)};
     width: auto;
   }
@@ -86,5 +80,5 @@ export {
   SubscribeSubmit,
   SubscribeStatus,
   SubscribeStatusSuccess,
-  SubscribeStatusError,
+  SubscribeStatusError
 };

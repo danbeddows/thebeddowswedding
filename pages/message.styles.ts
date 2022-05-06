@@ -1,0 +1,17 @@
+import { rem } from "polished";
+import styled from "styled-components";
+
+const MessageContainer = styled.div`
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  > * {
+    margin-bottom: ${rem(20)};
+  }
+`;
+
+export { MessageContainer };
