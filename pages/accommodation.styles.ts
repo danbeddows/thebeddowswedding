@@ -13,5 +13,5 @@ export const AccomList = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
 `;

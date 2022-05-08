@@ -5,6 +5,10 @@ const HotelContainer = styled.div`
   width: 100%;
   margin-bottom: 60px;
   border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
     width: 440px;
@@ -14,6 +18,10 @@ const HotelContainer = styled.div`
     overflow: hidden;
   }
 `;
+
+const HotelTop = styled.div``;
+
+const HotelBottom = styled.div``;
 
 const HotelImage = styled.img`
   max-width: 100%; // 876px by 582px
@@ -175,4 +183,6 @@ export {
   BookingLink,
   PriceEstimateActive,
   PriceEstimateDisabled,
+  HotelTop,
+  HotelBottom,
 };
