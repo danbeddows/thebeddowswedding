@@ -3,7 +3,7 @@ import {
   InputContainer,
   StyledError,
   StyledInput,
-  StyledLabel,
+  StyledLabel
 } from "./Input.styles";
 
 interface InputProps {
@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
   style,
   value = "",
   className = "",
-  error = "",
+  error = ""
 }) => {
   const [internalValue, setInternalValue] = useState("");
 
