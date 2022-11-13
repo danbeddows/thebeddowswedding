@@ -59,23 +59,24 @@ interface MobileLinksProps {
 
 const MobileLinks = styled.div<MobileLinksProps>`
   width: 100%;
-  height: 100%;
-  position: fixed;
+  height: 100vh;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--light-blue);
-  top: 0;
+  top: -20px;
   left: 0;
   z-index: 1010;
   margin-top: -100vh;
-  transition: margin-top 0.5s ease-in-out;
+  transition: margin-top 0.6s;
+  transition-timing-function: ease;
 
   ${(props) =>
     props.visible &&
     css`
-      margin-top: 0;
+      margin-top: 0px;
     `}
 `;
 
