@@ -98,11 +98,41 @@ const lostockTravelodge: HotelProps = {
     "https://maps.apple.com/?address=10%20Cheshire%20Business%20Park,%20Cheshire%20Ave,%20Lostock%20Gralam,%20Northwich,%20CW9%207UA,%20England&auid=13930028748534928211&ll=53.272047,-2.458516&lsp=9902&q=Travelodge%20Northwich%20Lostock%20Gralam&_ext=CjIKBQgEEOEBCgQIBRADCgQIBhALCgQIChAACgQIUhADCgQIVRANCgQIWRABCgUIpAEQARImKW6YlBUdokpAMQPEhFvntAPAOextunFDo0pAQS0lc+kjlgPAUAQ%3D",
 };
 
+const roseAndCrown: HotelProps = {
+  name: "Rose & Crown Inn",
+  description:
+    "Set in Knutsford in the Cheshire Region, 2.5 miles from Tatton Park, Rose & Crown Inn features a sun terrace. Guests can enjoy the on-site bar. Free WiFi is featured and free private parking is available on site.",
+  priceEstimate: 2, // £100-150
+  link: {
+    url: "https://www.knutsfordroseandcrown.co.uk/",
+  },
+  bookingLinks: [
+    {
+      type: "booking.com",
+      url: "https://www.booking.com/hotel/gb/rose-39-n-crown.en-gb.html",
+    },
+    {
+      type: "hotels.com",
+      url: "https://uk.hotels.com/ho632195808/rose-crown-inn-knutsford-united-kingdom/",
+    },
+    {
+      type: "expedia",
+      url: "https://www.expedia.co.uk/Knutsford-Hotels-Rose-Crown-Inn.h19724869.Hotel-Information",
+    },
+  ],
+  image: "/img/pages/accommodation/hotels/rose-and-crown-inn.jpg",
+  googleMaps:
+    "https://www.google.com/maps/place/Rose+%26+Crown/@53.3042636,-2.3752822,17z/data=!3m1!4b1!4m8!3m7!1s0x487a546c9273332f:0x5466a20d6d2ca1d3!5m2!4m1!1i2!8m2!3d53.3042715!4d-2.3730725?shorturl=1",
+  appleMaps:
+    "https://maps.apple.com/?address=62%20King%20St,%20Knutsford,%20WA16%206DT,%20England&auid=2026411623853097427&ll=53.304256,-2.373090&lsp=9902&q=The%20Rose%20and%20Crown&_ext=CjIKBQgEEOEBCgQIBRADCgQIBhALCgQIChAACgQIUhADCgQIVRANCgQIWRABCgUIpAEQARImKSOo0CBWpkpAMfbbljD6CgPAOaF99nx8p0pAQdyBMakw7ALAUAQ%3D",
+};
+
 const accomList = [
   theMereGolfResort,
   cottonsHotelAndSpa,
   mereCourtHotel,
   lostockTravelodge,
+  roseAndCrown,
 ];
 
 export default accomList;
