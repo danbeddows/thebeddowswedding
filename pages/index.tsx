@@ -20,27 +20,24 @@ const Index = () => {
   }
 
   return (
-    <>
-      <Header />
-      <WelcomeTile>
-        <MarriedNames>
-          Natalie
-          <br />+<br />
-          Dan
-        </MarriedNames>
-        <InfoSubtext>
-          <SubtextMobile>
-            22nd April 2023
-            <br />
-            The Holford Estate | Knutsford
-          </SubtextMobile>
-          <SubtextDesktop>
-            22nd April 2023 | The Holford Estate | Knutsford
-          </SubtextDesktop>
-          <DaysToGo>{message}</DaysToGo>
-        </InfoSubtext>
-      </WelcomeTile>
-    </>
+    <WelcomeTile>
+      <MarriedNames>
+        Natalie
+        <br />+<br />
+        Dan
+      </MarriedNames>
+      <InfoSubtext>
+        <SubtextMobile>
+          22nd April 2023
+          <br />
+          The Holford Estate | Knutsford
+        </SubtextMobile>
+        <SubtextDesktop>
+          22nd April 2023 | The Holford Estate | Knutsford
+        </SubtextDesktop>
+        <DaysToGo>{message}</DaysToGo>
+      </InfoSubtext>
+    </WelcomeTile>
   );
 };
 

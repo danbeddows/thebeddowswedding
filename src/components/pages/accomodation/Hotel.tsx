@@ -91,37 +91,41 @@ const Hotel: React.FC<HotelProps> = ({
             </Action>
           )}
         </ActionContainer>
-        <HotelBookingHeader>Book on:</HotelBookingHeader>
-        <HotelBookingContainer>
-          {bookingLinks.map((link, index) => {
-            return (
-              <BookingLinkContainer>
-                <BookingLink href={link.url} target="_blank">
-                  {link.type === "booking.com" && (
-                    <img
-                      src="/img/pages/accommodation/travelAgents/booking.com.svg"
-                      style={{ maxWidth: 88 }}
-                    />
-                  )}
+        {bookingLinks.length > 0 && (
+          <>
+            <HotelBookingHeader>Book on:</HotelBookingHeader>
+            <HotelBookingContainer>
+              {bookingLinks.map((link, index) => {
+                return (
+                  <BookingLinkContainer>
+                    <BookingLink href={link.url} target="_blank">
+                      {link.type === "booking.com" && (
+                        <img
+                          src="/img/pages/accommodation/travelAgents/booking.com.svg"
+                          style={{ maxWidth: 88 }}
+                        />
+                      )}
 
-                  {link.type === "hotels.com" && (
-                    <img
-                      src="/img/pages/accommodation/travelAgents/hotels.com.svg"
-                      width={100}
-                    />
-                  )}
+                      {link.type === "hotels.com" && (
+                        <img
+                          src="/img/pages/accommodation/travelAgents/hotels.com.svg"
+                          width={100}
+                        />
+                      )}
 
-                  {link.type === "expedia" && (
-                    <img
-                      src="/img/pages/accommodation/travelAgents/expedia.svg"
-                      width={74}
-                    />
-                  )}
-                </BookingLink>
-              </BookingLinkContainer>
-            );
-          })}
-        </HotelBookingContainer>
+                      {link.type === "expedia" && (
+                        <img
+                          src="/img/pages/accommodation/travelAgents/expedia.svg"
+                          width={74}
+                        />
+                      )}
+                    </BookingLink>
+                  </BookingLinkContainer>
+                );
+              })}
+            </HotelBookingContainer>
+          </>
+        )}
       </HotelBottom>
     </HotelContainer>
   );

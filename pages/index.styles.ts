@@ -14,7 +14,7 @@ const WelcomeTile = styled.section`
   align-items: flex-start;
   padding: 0 ${rem(30)};
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
     background-position: center center;
@@ -22,7 +22,7 @@ const WelcomeTile = styled.section`
     justify-content: center;
   }
 
-  @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
+  @media (min-width: ${props => props.theme.bp.desktopLarge}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
     background-position: left center;
@@ -39,7 +39,7 @@ const MarriedNames = styled.h1`
   text-align: right;
   display: none;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     display: block;
     font-size: ${rem(200)};
     line-height: ${rem(106)};
@@ -61,7 +61,7 @@ const InfoSubtext = styled.h4`
   text-align: left;
   letter-spacing: 1px;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     margin: ${rem(40)} 0 20px;
     font-size: ${rem(14)};
     line-height: ${rem(24)};
@@ -70,7 +70,7 @@ const InfoSubtext = styled.h4`
 `;
 
 const SubtextMobile = styled.span`
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     display: none;
   }
 `;
@@ -78,7 +78,7 @@ const SubtextMobile = styled.span`
 const SubtextDesktop = styled.span`
   display: none;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${props => props.theme.bp.desktop}) {
     display: inline;
   }
 `;
@@ -94,5 +94,5 @@ export {
   InfoSubtext,
   DaysToGo,
   SubtextMobile,
-  SubtextDesktop,
+  SubtextDesktop
 };
