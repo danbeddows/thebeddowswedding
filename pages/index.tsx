@@ -1,5 +1,4 @@
 import { differenceInCalendarDays } from "date-fns";
-import Header from "src/components/Header";
 import {
   DaysToGo,
   InfoSubtext,

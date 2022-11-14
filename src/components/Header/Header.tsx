@@ -60,6 +60,14 @@ const Header = () => {
     setIsMobileLinksVisible(false);
   };
 
+  const pageUsesHeaderBackground = () => {
+    if (router.pathname == "/venue") {
+      return true;
+    }
+
+    return false;
+  };
+
   // Check for URL change, and reevaluate selected header link
   useEffect(() => {
     setHeaderLinks(
@@ -78,7 +86,7 @@ const Header = () => {
   }, [router.pathname]);
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper hasBackground={pageUsesHeaderBackground()}>
       <InfoWrapper>
         <Link href="/" passHref={true}>
           <OurNames>{showLogo ? <>Natalie &amp; Dan</> : <>&nbsp;</>}</OurNames>

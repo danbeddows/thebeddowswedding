@@ -1,19 +1,29 @@
 import { cssVar, lighten, rem } from "polished";
 import styled, { css } from "styled-components";
 
-const HeaderWrapper = styled.div`
+interface HeaderWrapperProps {
+  hasBackground: boolean;
+}
+
+const HeaderWrapper = styled.div<HeaderWrapperProps>`
   position: absolute;
-  top: 20px;
+  top: 0px;
   z-index: 1000;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 ${rem(30)} 0 ${rem(20)};
+  padding: ${rem(20)} ${rem(30)} ${rem(20)} ${rem(20)};
+
+  ${(props) =>
+    props.hasBackground &&
+    css`
+      background: rgba(255, 255, 255, 0.7);
+    `};
 
   @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    padding: 0 ${rem(40)};
+    padding: ${rem(20)} ${rem(40)};
   }
 `;
 
