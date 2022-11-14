@@ -50,9 +50,13 @@ export const VenuePage = styled.div`
 export const VenueOverview = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    flex-direction: row;
+  }
 `;
 
 export const VenueDetails = styled.div``;
@@ -63,8 +67,15 @@ export const VenueAddress = styled.div`
 `;
 
 export const VenueMap = styled.div`
+  margin-top: 40px;
   margin-bottom: 100px;
-  width: 700px;
+  width: 100%;
   height: 400px;
-  background: #f00;
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    margin-top: 0px;
+    flex-direction: row;
+    width: 700px;
+    height: 400px;
+  }
 `;

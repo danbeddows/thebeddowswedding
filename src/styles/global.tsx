@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const ThemeGlobals = createGlobalStyle`
+export const ThemeGlobals = createGlobalStyle`
 	:root {
 		--dark-blue: #2c497f;
 		--light-blue: #7e9cbf;
@@ -10,7 +10,7 @@ const ThemeGlobals = createGlobalStyle`
 	}
 `;
 
-const Theme = {
+export const Theme = {
   bp: {
     mobile: "374px",
     mobileNoPx: "374",
@@ -22,5 +22,3 @@ const Theme = {
     smallMobileHeightNoPx: "500",
   },
 };
-
-export { ThemeGlobals, Theme };

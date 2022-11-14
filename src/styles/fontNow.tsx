@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const fontNowStyle = (assetDomain: string) => {
+export const fontNow = (assetDomain: string) => {
   return createGlobalStyle`
 		*, *::before, *::after {
 			font-family: "now";
@@ -57,5 +57,3 @@ const fontNowStyle = (assetDomain: string) => {
 		}
 	`;
 };
-
-export default fontNowStyle;

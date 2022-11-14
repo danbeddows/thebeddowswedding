@@ -1,5 +1,4 @@
 import accomList from "src/accommodationList";
-import Header from "src/components/Header";
 import Hotel from "src/components/pages/accomodation/Hotel";
 import { AccomList, AccommodationPage } from "./accommodation.styles";
 

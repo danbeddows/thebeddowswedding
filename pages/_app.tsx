@@ -5,8 +5,8 @@ import {
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Header from "src/components/Header";
-import fontEuphoria from "src/styles/fontEuphoria";
-import fontNow from "src/styles/fontNow";
+import { fontEuphoria } from "src/styles/fontEuphoria";
+import { fontNow } from "src/styles/fontNow";
 import { Theme, ThemeGlobals } from "src/styles/global";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 

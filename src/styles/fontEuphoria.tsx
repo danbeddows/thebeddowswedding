@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const fontEuphoriaStyle = (assetDomain: string) => {
+export const fontEuphoria = (assetDomain: string) => {
   return createGlobalStyle`
 		@font-face {
 			font-family: "euphoria";
@@ -11,5 +11,3 @@ const fontEuphoriaStyle = (assetDomain: string) => {
 		}
 	`;
 };
-
-export default fontEuphoriaStyle;
