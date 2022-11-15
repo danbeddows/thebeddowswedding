@@ -62,8 +62,12 @@ export const VenueOverview = styled.div`
 export const VenueDetails = styled.div``;
 
 export const VenueAddress = styled.div`
-  font-size: ${rem(20)};
+  font-size: ${rem(18)};
   line-height: 1.5;
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    font-size: ${rem(20)};
+  }
 `;
 
 export const VenueMap = styled.div`
