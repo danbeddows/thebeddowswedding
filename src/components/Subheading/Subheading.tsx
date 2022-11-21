@@ -7,7 +7,7 @@ const StyledH2 = styled.h2`
   font-weight: 400;
   letter-spacing: -1px;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     margin: ${rem(0)} 0 ${rem(16)};
     font-size: ${rem(34)};
   }

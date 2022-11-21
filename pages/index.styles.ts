@@ -13,7 +13,7 @@ export const WelcomeTile = styled.section`
   align-items: flex-start;
   padding: 0 ${rem(30)};
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
     background-position: center center;
@@ -38,7 +38,7 @@ export const MarriedNames = styled.h1`
   text-align: right;
   display: none;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: block;
     font-size: ${rem(200)};
     line-height: ${rem(106)};
@@ -60,7 +60,7 @@ export const InfoSubtext = styled.h4`
   text-align: left;
   letter-spacing: 1px;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     margin: ${rem(40)} 0 20px;
     font-size: ${rem(14)};
     line-height: ${rem(24)};
@@ -69,7 +69,7 @@ export const InfoSubtext = styled.h4`
 `;
 
 export const SubtextMobile = styled.span`
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: none;
   }
 `;
@@ -77,7 +77,7 @@ export const SubtextMobile = styled.span`
 export const SubtextDesktop = styled.span`
   display: none;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: inline;
   }
 `;

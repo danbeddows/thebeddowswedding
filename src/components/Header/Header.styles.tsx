@@ -22,7 +22,7 @@ const HeaderWrapper = styled.div<HeaderWrapperProps>`
       background: rgba(255, 255, 255, 0.7);
     `};
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     padding: ${rem(20)} ${rem(40)};
   }
 `;
@@ -41,7 +41,7 @@ const OurNames = styled.a`
   text-decoration: none;
   color: #000;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     font-size: ${rem(48)};
   }
 `;
@@ -49,7 +49,7 @@ const OurNames = styled.a`
 const DesktopLinkWrapper = styled.div`
   display: none;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,7 +58,7 @@ const DesktopLinkWrapper = styled.div`
 `;
 
 const MobileLinkWrapper = styled.div`
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: none;
   }
 `;
@@ -110,7 +110,7 @@ const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   color: var(--black);
   transition: 0.1s color;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     color: ${(props) => (props.selected ? "var(--dark-blue)" : "var(--black)")};
     margin: 0 ${rem(16)};
     font-size: ${rem(18)};
