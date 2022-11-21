@@ -1,3 +1,5 @@
+import { faArrowDown } from "@fortawesome/pro-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageHeading from "src/components/PageHeading";
 import Section from "src/components/Section";
 import Subheading from "src/components/Subheading";
@@ -8,6 +10,7 @@ import {
   VenueAddress,
   VenueDetails,
   VenueHero,
+  VenueHeroArrow,
   VenueMap,
   VenuePage,
 } from "./venue.styles";
@@ -15,6 +18,9 @@ import {
 const Venue = () => {
   return (
     <>
+      <VenueHeroArrow>
+        <FontAwesomeIcon icon={faArrowDown} />
+      </VenueHeroArrow>
       <VenueHero />
       <Section>
         <VenuePage>

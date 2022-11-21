@@ -1,6 +1,19 @@
 import { rem } from "polished";
 import styled from "styled-components";
 
+export const VenueHeroArrow = styled.div`
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #fff;
+  padding-bottom: 18px;
+  font-size: 32px;
+`;
+
 export const VenueHero = styled.section`
   width: 100%;
   height: 100vh;
