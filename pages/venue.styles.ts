@@ -58,12 +58,14 @@ export const VenueAddress = styled.div`
 
 export const MapButtons = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
-    font-size: ${rem(20)};
+  @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -107,7 +109,14 @@ export const VenueMap = styled.div`
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     margin-top: 0px;
     flex-direction: row;
-    width: 700px;
+    width: 500px;
+    height: 400px;
+  }
+
+  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+    margin-top: 0px;
+    flex-direction: row;
+    width: 680px;
     height: 400px;
   }
 `;
