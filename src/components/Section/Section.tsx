@@ -1,7 +1,6 @@
 import { Section } from "./Section.styles";
 
-const StyledSection: React.FC = ({ children }) => {
-  const hi = 123;
+const StyledSection: React.FC = ({ children, alignment }) => {
   return <Section>{children}</Section>;
 };
 
