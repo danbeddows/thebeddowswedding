@@ -1,6 +1,10 @@
 import { Section } from "./Section.styles";
 
-const StyledSection: React.FC = ({ children, alignment }) => {
+interface SectionProps {
+  alignment: string;
+}
+
+const StyledSection: React.FC<SectionProps> = ({ children, alignment }) => {
   return <Section>{children}</Section>;
 };
 
