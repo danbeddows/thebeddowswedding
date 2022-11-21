@@ -1,20 +1,23 @@
 import PageHeading from "src/components/PageHeading";
+import Section from "src/components/Section";
 import Subheading from "src/components/Subheading";
 import {
+  MapButton,
+  MapButtonLink,
+  MapButtons,
   VenueAddress,
   VenueDetails,
+  VenueHero,
   VenueMap,
-  VenueOverview,
   VenuePage,
-  VenueTile,
 } from "./venue.styles";
 
 const Venue = () => {
   return (
     <>
-      <VenueTile />
-      <VenuePage>
-        <VenueOverview>
+      <VenueHero />
+      <Section>
+        <VenuePage>
           <VenueDetails>
             <PageHeading>Venue</PageHeading>
             <Subheading>The Holford Estate</Subheading>
@@ -28,6 +31,25 @@ const Venue = () => {
               WA16 0UA
               <br />
             </VenueAddress>
+
+            <MapButtons>
+              <MapButtonLink
+                href="https://maps.apple.com/?address=Holford%20Mill,%20Chester%20Road,%20Plumley,%20Knutsford,%20WA16%200UA,%20England&ll=53.277014,-2.441687&q=Holford%20Mill&_ext=EiYpuJuW/+GiSkAxTd2JXfWXA8A5NnG8WwikSkBBdVUH0DB5A8BQBA%3D%3D"
+                target="_blank"
+              >
+                <MapButton>
+                  Open in <img src="/img/pages/accommodation/apple-maps.jpg" />
+                </MapButton>
+              </MapButtonLink>
+              <MapButtonLink
+                href="https://goo.gl/maps/qNtTC4xCpFxhiYm68"
+                target="_blank"
+              >
+                <MapButton>
+                  Open in <img src="/img/pages/accommodation/google-maps.png" />
+                </MapButton>
+              </MapButtonLink>
+            </MapButtons>
           </VenueDetails>
 
           <VenueMap>
@@ -39,8 +61,8 @@ const Venue = () => {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </VenueMap>
-        </VenueOverview>
-      </VenuePage>
+        </VenuePage>
+      </Section>
     </>
   );
 };

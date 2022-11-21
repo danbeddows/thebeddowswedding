@@ -10,7 +10,7 @@ const HotelContainer = styled.div`
   align-items: stretch;
   justify-content: space-between;
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     width: 440px;
     margin: 0 10px 40px 0px;
     border: 1px solid #e6e6e6;
@@ -78,7 +78,7 @@ const ActionContainer = styled.div`
     }
   }
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     flex-direction: row;
     height: 56px;
 
@@ -106,7 +106,7 @@ const Action = styled.div`
     max-height: 24px;
   }
 
-  @media (min-width: ${(props) => props.theme.bp.desktop}) {
+  @media (min-width: ${(props) => props.theme.bp.tablet}) {
     width: auto;
     height: 56px;
   }
