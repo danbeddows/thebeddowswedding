@@ -1,7 +1,7 @@
 import { Section } from "./Section.styles";
 
 interface SectionProps {
-  alignment: string;
+  alignment?: string;
 }
 
 const StyledSection: React.FC<SectionProps> = ({ children, alignment }) => {
