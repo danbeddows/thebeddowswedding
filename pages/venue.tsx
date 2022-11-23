@@ -30,7 +30,7 @@ const Venue = () => {
             <VenueAddress>
               The Holford Estate,
               <br />
-              Off Chester Road,
+              Chester Road,
               <br />
               Plumley,
               <br />
