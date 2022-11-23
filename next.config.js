@@ -5,7 +5,7 @@ module.exports = {
       {
         source: "/applemaps",
         destination:
-          "https://maps.apple.com/?address=Holford%20Mill,%20Chester%20Road,%20Plumley,%20Knutsford,%20WA16%200UA,%20England&ll=53.277014,-2.441687&q=Holford%20Mill&_ext=EiYpuJuW/+GiSkAxTd2JXfWXA8A5NnG8WwikSkBBdVUH0DB5A8BQBA%3D%3D",
+          "https://maps.apple.com/?address=Chester%20Road,%20Plumley,%20WA16%200UA,%20England&auid=15639567001811483483&ll=53.275505,-2.437565&lsp=9902&q=The%20Holford%20Estate&_ext=CjMKBQgEEOEBCgQIBRADCgUIBhDfAQoECAoQAAoECFIQAwoECFUQDwoECFkQAgoFCKQBEAESJilZkk30paJKQDHY2dXfGJADwDnXZ3NQzKNKQEE+vcOoVHEDwFAE",
         permanent: false,
         basePath: false,
       },
