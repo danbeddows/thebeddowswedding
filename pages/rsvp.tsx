@@ -6,7 +6,7 @@ import PageHeading from "src/components/PageHeading/PageHeading";
 import Textarea from "src/components/Textarea";
 import { RsvpPage } from "./rsvp.styles";
 
-type MessageErrorType = "names" | "answer" | "email" | "message";
+type MessageErrorType = "names" | "answer" | "hasDietReqs" | "dietReqs";
 interface MessageError {
   type: MessageErrorType;
   description: string;
@@ -15,12 +15,12 @@ interface MessageError {
 const Message = () => {
   const [names, setNames] = useState("");
   const [answer, setAnswer] = useState("unknown");
-  const [dietReqs, setDietReqs] = useState("unknown");
-  const [emailAddress, setEmailAddress] = useState("");
-  const [message, setMessage] = useState("");
+  const [hasDietReqs, setHasDietReqs] = useState("unknown");
+  const [dietReqs, setDietReqs] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<MessageError[]>([]);
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
   const getFormError = (type: MessageErrorType) => {
     const errors = formErrors.filter((err) => err.type == type);
@@ -33,42 +33,99 @@ const Message = () => {
   };
 
   const handleSubmit = () => {
+    console.log(123);
     const errors: MessageError[] = [];
 
     // Validate input
-    if (names == "") {
-      errors.push({ type: "names", description: "Enter your name" });
+    if (names === "") {
+      errors.push({ type: "names", description: "Enter your name(s)" });
     }
 
-    if (emailAddress == "") {
+    if (answer !== "true" && answer !== "false") {
       errors.push({
-        type: "email",
-        description: "Enter your email address",
+        type: "answer",
+        description: "Select whether you can join us or not.",
       });
     }
 
-    if (message == "") {
-      errors.push({ type: "message", description: "Enter your message" });
+    if (answer === "true") {
+      if (hasDietReqs !== "true" && hasDietReqs !== "false") {
+        errors.push({
+          type: "hasDietReqs",
+          description:
+            "Select whether your party has dietary requirements or not. ",
+        });
+      } else {
+        if (hasDietReqs === "true" && dietReqs === "") {
+          errors.push({ type: "dietReqs", description: "Enter your message" });
+        }
+      }
     }
+
+    console.log(errors);
 
     if (errors.length == 0) {
       setIsSubmitting(true);
+
+      fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          names,
+          decision: answer === "true",
+          dietReqs: dietReqs,
+        }),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.status == "success") {
+            // Show message + trigger scroll
+            setIsSubmitting(false);
+            setFormSubmitted(true);
+          } else if (response.status == "failed") {
+            let errors = response.errors as MessageError[];
+            let responseErrors: Array<MessageError> = [];
+
+            errors.forEach((error: MessageError) => {
+              responseErrors.push({
+                type: error.type,
+                description: error.description,
+              });
+            });
+
+            setFormErrors(responseErrors);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setFormErrors(errors);
     }
   };
 
   useEffect(() => {
-    if (answer === "false") {
-      setSubmitDisabled(false);
+    if (names === "") {
+      setSubmitDisabled(true);
     } else {
-      if (dietReqs === "false") {
+      if (answer === "false") {
         setSubmitDisabled(false);
       } else {
-        setSubmitDisabled(true);
+        if (hasDietReqs === "false") {
+          setSubmitDisabled(false);
+        } else {
+          if (dietReqs !== "") {
+            setSubmitDisabled(false);
+          } else {
+            setSubmitDisabled(true);
+          }
+        }
       }
     }
-  }, [answer]);
+  }, [names, answer, hasDietReqs]);
 
   return (
     <RsvpPage>
@@ -88,8 +145,8 @@ const Message = () => {
         type="radio"
         label="Will you be joining us?"
         options={[
-          { label: "yes", value: true },
-          { label: "no", value: false },
+          { label: "yes", value: "true" },
+          { label: "no", value: "false" },
         ]}
         name={"answer"}
         value={answer}
@@ -105,36 +162,38 @@ const Message = () => {
             type="radio"
             label="Does anybody have dietary requirements?"
             options={[
-              { label: "yes", value: true },
-              { label: "no", value: false },
+              { label: "yes", value: "true" },
+              { label: "no", value: "false" },
             ]}
             name={"dietreqs"}
-            value={dietReqs}
+            value={hasDietReqs}
             onChange={(val: string) => {
-              setDietReqs(val);
+              setHasDietReqs(val);
               console.log(val);
             }}
-            error={getFormError("dietreqs")}
+            error={getFormError("hasDietReqs")}
           />
         </>
       )}
 
-      <Textarea
-        label="Message"
-        onChange={(val: string) => {
-          setMessage(val);
-        }}
-        placeholder="Enter your message"
-        style={{ minWidth: rem(460), minHeight: rem(240) }}
-        error={getFormError("message")}
-      />
+      {hasDietReqs === "true" && (
+        <Textarea
+          label="Message"
+          onChange={(val: string) => {
+            setDietReqs(val);
+          }}
+          placeholder="Enter any dietary requirements"
+          style={{ minWidth: rem(460), minHeight: rem(240) }}
+          error={getFormError("dietReqs")}
+        />
+      )}
 
       <Button
         isLoading={isSubmitting}
         onClick={handleSubmit}
         disabled={submitDisabled}
       >
-        Submit
+        Submit RSVP
       </Button>
     </RsvpPage>
   );
