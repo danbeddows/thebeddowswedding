@@ -31,7 +31,7 @@ const addError = (error: { field: string; error: string }) => {
  * Validate request data, and use AWS SDK to send email
  * via AWS SES
  */
-const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
+const handleRsvForm = async (req: NextApiRequest, res: NextApiResponse) => {
   errors = undefined;
   let status = "failed";
 
