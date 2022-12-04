@@ -10,16 +10,16 @@ AWS.config.update({
   secretAccessKey: process.env.AWS_APP_SECRET_ACCESS_KEY,
 });
 
-interface IError {
-  field: string;
-  error: string;
+interface Error {
+  type: string;
+  message: string;
 }
 
 /*
  * Error var helper
  */
-let errors: IError[] | undefined = undefined;
-const addError = (error: { field: string; error: string }) => {
+let errors: Error[] | undefined = undefined;
+const addError = (error: Error) => {
   if (!errors) {
     errors = [];
   }
@@ -31,31 +31,32 @@ const addError = (error: { field: string; error: string }) => {
  * Validate request data, and use AWS SDK to send email
  * via AWS SES
  */
-const handleRsvForm = async (req: NextApiRequest, res: NextApiResponse) => {
+const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   errors = undefined;
   let status = "failed";
 
-  const emailAddress = req.body.email;
-  const name = req.body.name;
-  const message = req.body.message;
+  const names = req.body.names;
+  const decision = req.body.decision;
+  const dietReqs = req.body.dietReqs;
 
-  const emailRegex = new RegExp(/^[^s@]+@([^s@.,]+.)+[^s@.,]{2,}$/);
+  if (!names) {
+    addError({ type: "names", message: "Enter the names of your party." });
+  } else if (names.length > 1000) {
+    addError({ type: "names", message: "Too many people are coming, sorry!" });
+  }
 
-  if (!emailAddress) {
-    addError({ field: "email", error: "Enter your email address." });
-  } else if (!emailRegex.exec(emailAddress)) {
+  if (decision !== false || decision !== true) {
     addError({
-      field: "email",
-      error: "The email address you entered is invalid.",
+      type: "decision",
+      message: "Enter whether you will be joining us or not.",
     });
   }
 
-  if (!name) {
-    addError({ field: "name", error: "Enter your name." });
-  }
-
-  if (!message) {
-    addError({ field: "message", error: "Enter your message." });
+  if (dietReqs.length > 5000) {
+    addError({
+      type: "dietReqs",
+      message: "There is nothing left to eat, sorry!",
+    });
   }
 
   if (!errors) {
@@ -125,4 +126,4 @@ const sleep = (ms: number) => {
   });
 };
 
-export default handleContactForm;
+export default handleRsvpForm;
