@@ -42,10 +42,10 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const aboutTitle = "The Beddows Wedding";
-  const aboutDomain = "thebeddowswedding.com";
+  const aboutTitle = "The Benn Wedding";
+  const aboutDomain = "thebennwedding.com";
   const aboutUrl = `https://www.${aboutDomain}`;
-  const aboutDescription = "Natalie & Dan are getting married in 2023 🎉";
+  const aboutDescription = "Tom & Catherine are getting married in 2023 🎉";
   const aboutImgUrl = `${process.env.NEXT_PUBLIC_ASSET_SERVER}/img/og.png`;
 
   return (

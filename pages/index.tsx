@@ -9,7 +9,7 @@ import {
 } from "./index.styles";
 
 const Index = () => {
-  const numDays = differenceInCalendarDays(new Date("2023/04/22"), Date.now());
+  const numDays = differenceInCalendarDays(new Date("2023/05/12"), Date.now());
   let message = `${numDays} ${numDays > 1 ? "days" : "day"} to go`;
 
   if (numDays == 0) {
@@ -21,18 +21,18 @@ const Index = () => {
   return (
     <WelcomeTile>
       <MarriedNames>
-        Natalie
+        Tom
         <br />+<br />
-        Dan
+        Catherine
       </MarriedNames>
       <InfoSubtext>
         <SubtextMobile>
-          22nd April 2023
+          12th May 2023
           <br />
-          The Holford Estate | Knutsford
+          Owen Barn Wedding House | Knutsford
         </SubtextMobile>
         <SubtextDesktop>
-          22nd April 2023 | The Holford Estate | Knutsford
+          12th May 2023 | Owen Barn Wedding House | Knutsford
         </SubtextDesktop>
         <DaysToGo>{message}</DaysToGo>
       </InfoSubtext>

@@ -44,9 +44,9 @@ const Header = () => {
   const showLogo = !(windowDimensions.width > 768 && router.pathname === "/");
 
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
-    { url: "/", label: "Home" },
-    { url: "/venue", label: "Venue" },
-    { url: "/accommodation", label: "Accommodation" },
+    // { url: "/", label: "Home" },
+    // { url: "/venue", label: "Venue" },
+    // { url: "/accommodation", label: "Accommodation" },
     // { url: "/gifts", label: "Gifts" },
     // { url: "/message", label: "Message Us" },
   ]);
@@ -89,7 +89,9 @@ const Header = () => {
     <HeaderWrapper hasBackground={pageUsesHeaderBackground()}>
       <InfoWrapper>
         <Link href="/" passHref={true}>
-          <OurNames>{showLogo ? <>Natalie &amp; Dan</> : <>&nbsp;</>}</OurNames>
+          <OurNames>
+            {showLogo ? <>Tom &amp; Catherine</> : <>&nbsp;</>}
+          </OurNames>
         </Link>
       </InfoWrapper>
       <DesktopLinkWrapper>
