@@ -35,8 +35,9 @@ const InfoWrapper = styled.div`
 `;
 
 const OurNames = styled.a`
-  font-family: "euphoria";
-  font-size: ${rem(40)};
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: ${rem(26)};
   margin: 0;
   text-decoration: none;
   color: #000;

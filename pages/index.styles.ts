@@ -31,16 +31,18 @@ export const WelcomeTile = styled.section`
 `;
 
 export const MarriedNames = styled.h1`
+  font-family: "roboto";
+  font-weight: 400;
+  color: #1a1a1a;
   font-size: ${rem(100)};
   line-height: ${rem(53)};
   margin: 0;
-  font-family: "euphoria";
   text-align: right;
   display: none;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: block;
-    font-size: ${rem(200)};
+    font-size: ${rem(68)};
     line-height: ${rem(106)};
   }
 `;
@@ -54,17 +56,19 @@ export const InfoSubtext = styled.h4`
   font-size: ${rem(14)};
   font-weight: 500;
   text-align: left;
-  margin-top: 200px;
+  margin-top: 320px;
   display: block;
   margin-bottom: 200px;
   text-align: left;
   letter-spacing: 1px;
+  color: #fff;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     margin: ${rem(40)} 0 20px;
     font-size: ${rem(14)};
     line-height: ${rem(24)};
     text-align: right;
+    color: #000;
   }
 `;
 
