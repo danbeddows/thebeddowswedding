@@ -1,4 +1,4 @@
-import { cssVar, darken, lighten, rem } from "polished";
+import { cssVar, darken, grayscale, lighten, rem } from "polished";
 import styled from "styled-components";
 
 const buttonColour = String(cssVar("--green", "#9fbfB0"));
@@ -23,9 +23,10 @@ const StyledButton = styled.button`
   }
 
   :disabled {
-    border-color: ${lighten(0.1, buttonColour)};
-    background: ${lighten(0.2, buttonColour)};
+    border-color: ${lighten(0.05, grayscale(buttonColour))};
+    background: ${lighten(0.1, grayscale(buttonColour))};
     color: #444;
+    cursor: default;
   }
 `;
 

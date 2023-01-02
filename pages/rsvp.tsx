@@ -225,15 +225,13 @@ const Message = () => {
         />
       )}
 
-      {!submitDisabled && (
-        <Button
-          isLoading={isSubmitting}
-          onClick={handleSubmit}
-          disabled={submitDisabled}
-        >
-          Submit RSVP
-        </Button>
-      )}
+      <Button
+        isLoading={isSubmitting}
+        onClick={handleSubmit}
+        disabled={submitDisabled}
+      >
+        Submit RSVP
+      </Button>
     </RsvpPage>
   );
 };
