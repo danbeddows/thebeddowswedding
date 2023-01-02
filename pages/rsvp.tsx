@@ -6,7 +6,12 @@ import PageHeading from "src/components/PageHeading/PageHeading";
 import Textarea from "src/components/Textarea";
 import { RsvpPage } from "./rsvp.styles";
 
-type MessageErrorType = "names" | "answer" | "hasDietReqs" | "dietReqs";
+type MessageErrorType =
+  | "names"
+  | "answer"
+  | "hasDietReqs"
+  | "dietReqs"
+  | "doubleCheck";
 interface MessageError {
   type: MessageErrorType;
   description: string;
@@ -15,12 +20,38 @@ interface MessageError {
 const Message = () => {
   const [names, setNames] = useState("");
   const [answer, setAnswer] = useState("unknown");
+  const [doubleCheck, setDoubleCheck] = useState("unknown");
   const [hasDietReqs, setHasDietReqs] = useState("unknown");
   const [dietReqs, setDietReqs] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<MessageError[]>([]);
-  const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+
+  // Determine whether the form is submitable
+  let submitDisabled = true;
+  if (names === "") {
+    submitDisabled = true;
+  } else {
+    if (answer === "false") {
+      if (doubleCheck === "true") {
+        submitDisabled = false;
+      } else {
+        submitDisabled = true;
+      }
+    } else {
+      if (hasDietReqs === "false") {
+        submitDisabled = false;
+      } else {
+        if (dietReqs !== "") {
+          submitDisabled = false;
+        } else {
+          submitDisabled = true;
+        }
+      }
+    }
+  }
+
+  console.log("submitable", !submitDisabled);
 
   const getFormError = (type: MessageErrorType) => {
     const errors = formErrors.filter((err) => err.type == type);
@@ -59,6 +90,15 @@ const Message = () => {
         if (hasDietReqs === "true" && dietReqs === "") {
           errors.push({ type: "dietReqs", description: "Enter your message" });
         }
+      }
+    }
+
+    if (answer === "false") {
+      if (doubleCheck === "false") {
+        errors.push({
+          type: "doubleCheck",
+          description: "Please confirm you will not be joining us.",
+        });
       }
     }
 
@@ -107,26 +147,6 @@ const Message = () => {
     }
   };
 
-  useEffect(() => {
-    if (names === "") {
-      setSubmitDisabled(true);
-    } else {
-      if (answer === "false") {
-        setSubmitDisabled(false);
-      } else {
-        if (hasDietReqs === "false") {
-          setSubmitDisabled(false);
-        } else {
-          if (dietReqs !== "") {
-            setSubmitDisabled(false);
-          } else {
-            setSubmitDisabled(true);
-          }
-        }
-      }
-    }
-  }, [names, answer, hasDietReqs]);
-
   return (
     <RsvpPage>
       <PageHeading>RSVP</PageHeading>
@@ -155,6 +175,23 @@ const Message = () => {
         }}
         error={getFormError("answer")}
       />
+
+      {answer === "false" && (
+        <Input
+          type="radio"
+          label="Are you sure you won't be joining us?"
+          options={[
+            { label: "yes", value: "true" },
+            { label: "no", value: "false" },
+          ]}
+          name={"doubleCheck"}
+          value={doubleCheck}
+          onChange={(val: string) => {
+            setDoubleCheck(val);
+          }}
+          error={getFormError("doubleCheck")}
+        />
+      )}
 
       {answer === "true" && (
         <>
@@ -188,13 +225,15 @@ const Message = () => {
         />
       )}
 
-      <Button
-        isLoading={isSubmitting}
-        onClick={handleSubmit}
-        disabled={submitDisabled}
-      >
-        Submit RSVP
-      </Button>
+      {!submitDisabled && (
+        <Button
+          isLoading={isSubmitting}
+          onClick={handleSubmit}
+          disabled={submitDisabled}
+        >
+          Submit RSVP
+        </Button>
+      )}
     </RsvpPage>
   );
 };

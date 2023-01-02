@@ -45,7 +45,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
     addError({ type: "names", message: "Too many people are coming, sorry!" });
   }
 
-  if (decision !== false || decision !== true) {
+  if (decision !== false && decision !== true) {
     addError({
       type: "decision",
       message: "Enter whether you will be joining us or not.",
@@ -55,29 +55,29 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   if (dietReqs.length > 5000) {
     addError({
       type: "dietReqs",
-      message: "There is nothing left to eat, sorry!",
+      message: "There is nothing possible to eat, sorry!",
     });
   }
 
   if (!errors) {
     const emailParams = {
       Destination: {
-        ToAddresses: [process.env.ADMIN_EMAIL],
+        ToAddresses: [process.env.RSVP_EMAIL_TO],
       },
       Message: {
         Body: {
           Html: {
             Charset: "UTF-8",
-            Data: formatMessage(name, emailAddress, message),
+            Data: formatMessage(names, decision, dietReqs),
           },
           Text: {
             Charset: "UTF-8",
-            Data: "danbeddows.com contact submission",
+            Data: "Wedding RSVP",
           },
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "New Contact Form Submission",
+          Data: "Wedding RSVP",
         },
       },
       Source: process.env.ADMIN_EMAIL_FROM,
@@ -91,8 +91,8 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
       })
       .catch(function (err: any) {
         addError({
-          field: "internal",
-          error: "An unknown error occured. Please try again later.",
+          type: "internal",
+          message: "An unknown error occured. Please try again later.",
         });
       });
 
@@ -107,17 +107,20 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-const formatMessage = (name: string, email: string, message: string) => {
-  return (
-    "<html><body><h1>New Contact Form Submission</h1><h2>Name</h2><p>" +
-    name +
-    "</p>" +
-    "<h2>Email</h2><p>" +
-    email +
-    "</p><h2>Message</h2><p>" +
-    message +
-    "</p></body></html>"
-  );
+const formatMessage = (names: string, decision: boolean, dietReqs: string) => {
+  let content = "<h1>New Wedding RSVP</h1><br/><br/>";
+
+  content += `<h2>Names</h2> <p>${names}</p><br/><br/>`;
+
+  content += `<h2>Decision</h2> <p>${
+    decision ? "We would love to attend" : "We will NOT be attending."
+  }</p><br/><br/>`;
+
+  if (decision && dietReqs != "") {
+    content += `<h2>Dietary requirements</h2> <p>${dietReqs}</p><br/><br/>`;
+  }
+
+  return `<html><body>${content}</body></html>`;
 };
 
 const sleep = (ms: number) => {
