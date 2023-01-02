@@ -15,6 +15,12 @@ module.exports = {
         permanent: false,
         basePath: false,
       },
+      {
+        source: "/honeymoon",
+        destination: "https://prezola.com/wishlists/10270430/3663762",
+        permanent: false,
+        basePath: false,
+      },
     ];
   },
 };
