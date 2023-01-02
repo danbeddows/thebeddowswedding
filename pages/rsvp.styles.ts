@@ -1,4 +1,5 @@
 import { rem } from "polished";
+import { InputContainer } from "src/components/Input/Input.styles";
 import styled from "styled-components";
 
 export const RsvpPage = styled.div`
@@ -13,7 +14,7 @@ export const RsvpPage = styled.div`
     margin: 140px 40px;
   }
 
-  > * {
-    margin-bottom: ${rem(20)};
+  ${InputContainer} {
+    margin-bottom: ${rem(40)};
   }
 `;
