@@ -1,7 +1,8 @@
 import { cssVar, darken, grayscale, lighten, rem } from "polished";
 import styled from "styled-components";
 
-const buttonColour = String(cssVar("--green", "#9fbfB0"));
+const buttonColour = String(cssVar("--orange", "#be9279"));
+const buttonTextColour = String("#fff");
 
 const StyledButton = styled.button`
   margin: 3px 0 5px;
@@ -12,7 +13,7 @@ const StyledButton = styled.button`
   border: 1px solid ${darken(0.2, buttonColour)};
   border-radius: 5px;
   background: ${buttonColour};
-  color: #000;
+  color: ${buttonTextColour};
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
