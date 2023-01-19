@@ -1,239 +1,267 @@
-import { rem } from "polished";
-import { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Button from "src/components/Button";
-import Input from "src/components/Input";
 import PageHeading from "src/components/PageHeading/PageHeading";
-import Textarea from "src/components/Textarea";
-import { RsvpPage } from "./rsvp.styles";
+import Paragraph from "src/components/Paragraph";
+import Section from "src/components/Section";
+import Subheading from "src/components/Subheading";
+import {
+  Error,
+  Guest,
+  GuestDecision,
+  GuestDelete,
+  GuestDiet,
+  GuestHeader,
+  GuestName,
+  GuestPhone,
+  RsvpPage,
+} from "./rsvp.styles";
 
-type MessageErrorType =
-  | "names"
-  | "answer"
-  | "hasDietReqs"
-  | "dietReqs"
-  | "doubleCheck";
-interface MessageError {
-  type: MessageErrorType;
-  description: string;
+interface Guest {
+  name: string;
+  dietReqs: string;
+  phone: string;
+  willAttend: string;
+  nameRef?: React.RefObject<HTMLInputElement>;
+  errors?: {
+    nameError?: string;
+    dietReqsError?: string;
+    phoneError?: string;
+    willAttendError?: string;
+  };
 }
 
-const Message = () => {
-  const [names, setNames] = useState("");
-  const [answer, setAnswer] = useState("unknown");
-  const [doubleCheck, setDoubleCheck] = useState("unknown");
-  const [hasDietReqs, setHasDietReqs] = useState("unknown");
-  const [dietReqs, setDietReqs] = useState("");
+const Rsvp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formErrors, setFormErrors] = useState<MessageError[]>([]);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
-  // Determine whether the form is submitable
-  let submitDisabled = true;
-  if (names === "") {
-    submitDisabled = true;
-  } else {
-    if (answer === "false") {
-      if (doubleCheck === "true") {
-        submitDisabled = false;
-      } else {
-        submitDisabled = true;
-      }
-    } else {
-      if (hasDietReqs === "false") {
-        submitDisabled = false;
-      } else {
-        if (dietReqs !== "") {
-          submitDisabled = false;
-        } else {
-          submitDisabled = true;
-        }
+  const [guests, setGuests] = useState<Guest[]>([]);
+  const [lastGuestCount, setLastGuestCount] = useState(0);
+
+  useEffect(() => {
+    // if guest count has increased, scroll to bottom and click new element
+    if (guests.length > lastGuestCount) {
+      // Focus on latest input
+      const createdGuest = guests[guests.length - 1];
+      createdGuest.nameRef?.current?.focus();
+
+      if (guests.length > 1) {
+        window.scrollTo({
+          left: 0,
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
       }
     }
-  }
 
-  console.log("submitable", !submitDisabled);
+    console.log(guests);
 
-  const getFormError = (type: MessageErrorType) => {
-    const errors = formErrors.filter((err) => err.type == type);
+    setLastGuestCount(guests.length);
+  }, [guests]);
 
-    if (errors.length > 0) {
-      return errors[0].description;
-    }
+  const newGuest = () => {
+    const newGuest = {
+      name: "",
+      phone: "",
+      willAttend: "-1",
+      dietReqs: "",
+      nameRef: React.createRef<HTMLInputElement>(),
+    };
 
-    return "";
+    setGuests([...guests, newGuest]);
   };
 
-  const handleSubmit = () => {
-    console.log(123);
-    const errors: MessageError[] = [];
+  if (guests.length === 0) {
+    newGuest();
+  }
 
-    // Validate input
-    if (names === "") {
-      errors.push({ type: "names", description: "Enter your name(s)" });
-    }
+  const submitForm = () => {
+    // Run through each guest and validate data
+    let hasError = false;
 
-    if (answer !== "true" && answer !== "false") {
-      errors.push({
-        type: "answer",
-        description: "Select whether you can join us or not.",
-      });
-    }
-
-    if (answer === "true") {
-      if (hasDietReqs !== "true" && hasDietReqs !== "false") {
-        errors.push({
-          type: "hasDietReqs",
-          description:
-            "Select whether your party has dietary requirements or not. ",
-        });
+    guests.forEach((guest, index) => {
+      if (guest.name === "") {
+        updateGuestError(index, "nameError", "Enter guest name.");
+        hasError = true;
+      } else if (guest.name.length > 100) {
+        updateGuestError(
+          index,
+          "nameError",
+          "This guests name is too long. Sorry! :("
+        );
+        hasError = true;
       } else {
-        if (hasDietReqs === "true" && dietReqs === "") {
-          errors.push({ type: "dietReqs", description: "Enter your message" });
-        }
+        updateGuestError(index, "nameError", "");
       }
-    }
 
-    if (answer === "false") {
-      if (doubleCheck === "false") {
-        errors.push({
-          type: "doubleCheck",
-          description: "Please confirm you will not be joining us.",
-        });
+      if (guest.willAttend === "-1") {
+        updateGuestError(index, "willAttendError", "Select whether attending.");
+        hasError = true;
+      } else {
+        updateGuestError(index, "willAttendError", "");
       }
-    }
 
-    console.log(errors);
+      if (guest.phone === "") {
+        updateGuestError(index, "phoneError", "Enter phone number.");
+        hasError = true;
+      } else if (guest.phone.length > 30) {
+        updateGuestError(index, "phoneError", "Enter valid phone number");
+        hasError = true;
+      } else {
+        updateGuestError(index, "phoneError", "");
+      }
 
-    if (errors.length == 0) {
+      if (guest.dietReqs.length > 300) {
+        updateGuestError(
+          index,
+          "dietReqsError",
+          "Too many diet requirements, sorry!"
+        );
+        hasError = true;
+      } else {
+        updateGuestError(index, "dietReqsError", "");
+      }
+    });
+
+    if (!hasError) {
       setIsSubmitting(true);
-
-      fetch("/api/rsvp", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          names,
-          decision: answer === "true",
-          dietReqs: dietReqs,
-        }),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.status == "success") {
-            // Show message + trigger scroll
-            setIsSubmitting(false);
-            setFormSubmitted(true);
-          } else if (response.status == "failed") {
-            let errors = response.errors as MessageError[];
-            let responseErrors: Array<MessageError> = [];
-
-            errors.forEach((error: MessageError) => {
-              responseErrors.push({
-                type: error.type,
-                description: error.description,
-              });
-            });
-
-            setFormErrors(responseErrors);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setFormErrors(errors);
     }
+  };
+
+  const updateGuestValue = (index: number, key: string, value: string) => {
+    setGuests(
+      guests.map((guest, n) => {
+        if (n === index) {
+          return {
+            ...guest,
+            [key]: value,
+          };
+        }
+
+        return guest;
+      })
+    );
+  };
+
+  const updateGuestError = (index: number, key: string, value: string) => {
+    setGuests((guests) =>
+      guests.map((guest, n) => {
+        if (n === index) {
+          return {
+            ...guest,
+            errors: {
+              ...guest.errors,
+              [key]: value,
+            },
+          };
+        }
+
+        return guest;
+      })
+    );
+  };
+
+  const deleteGuest = (index: number) => {
+    setGuests(
+      guests.filter((guest, n) => {
+        return n !== index;
+      })
+    );
   };
 
   return (
     <RsvpPage>
-      <PageHeading>RSVP</PageHeading>
-      <Input
-        type="text"
-        label="Your name(s)"
-        onChange={(val: string) => {
-          setNames(val);
-        }}
-        placeholder="Enter your name(s)"
-        style={{ minWidth: rem(380) }}
-        error={getFormError("names")}
-      />
-
-      <Input
-        type="radio"
-        label="Will you be joining us?"
-        options={[
-          { label: "yes", value: "true" },
-          { label: "no", value: "false" },
-        ]}
-        name={"answer"}
-        value={answer}
-        onChange={(val: string) => {
-          setAnswer(val);
-        }}
-        error={getFormError("answer")}
-      />
-
-      {answer === "false" && (
-        <Input
-          type="radio"
-          label="Are you sure you won't be joining us?"
-          options={[
-            { label: "yes", value: "true" },
-            { label: "no", value: "false" },
-          ]}
-          name={"doubleCheck"}
-          value={doubleCheck}
-          onChange={(val: string) => {
-            setDoubleCheck(val);
+      <Section>
+        <PageHeading>RSVP</PageHeading>
+        <Subheading>Say yes!</Subheading>
+        <Paragraph>
+          We'd love for you to join us on the 22nd April 2023 to celebrate our
+          wedding.
+        </Paragraph>
+        <Paragraph>
+          Please let us know if you can make it by the 15th February.
+        </Paragraph>
+      </Section>
+      <Section>
+        {" "}
+        <Paragraph>
+          Please add the details of everyone in your party below.
+        </Paragraph>
+        <GuestHeader>
+          <h2>Guests</h2>
+          <Button onClick={newGuest}>Add another guest</Button>
+        </GuestHeader>
+        <Guest isHeader key={-1}>
+          <div>Name</div>
+          <div>Attending?</div>
+          <div>Phone number</div>
+          <div>Dietary requirements</div>
+        </Guest>
+        {guests.map((guest, n) => (
+          <Guest key={n}>
+            <div>
+              <GuestName
+                type="text"
+                value={guest.name}
+                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  updateGuestValue(n, "name", e?.currentTarget.value);
+                }}
+                placeholder="Enter Name"
+                ref={guest.nameRef}
+              />
+              <Error>{guest.errors?.nameError}</Error>
+              <GuestDelete
+                onClick={() => {
+                  deleteGuest(n);
+                }}
+              >
+                Remove guest
+              </GuestDelete>
+            </div>
+            <div>
+              <GuestDecision
+                onChange={(e: React.FormEvent<HTMLSelectElement>) => {
+                  updateGuestValue(n, "willAttend", e?.currentTarget.value);
+                }}
+                value={guest.willAttend}
+              >
+                <option value="-1">Please select.</option>
+                <option value="yes">Yes, can't wait!</option>
+                <option value="no">Sorry, can't make it.</option>
+              </GuestDecision>
+              <Error>{guest.errors?.willAttendError}</Error>
+            </div>
+            <div>
+              <GuestPhone
+                value={guest.phone}
+                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  updateGuestValue(n, "phone", e?.currentTarget.value);
+                }}
+                placeholder="Enter phone"
+              />
+              <Error>{guest.errors?.phoneError}</Error>
+            </div>
+            <div>
+              <GuestDiet
+                placeholder="e.g vegeterian, gluten free, etc"
+                onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
+                  updateGuestValue(n, "dietReqs", e?.currentTarget.value);
+                }}
+              ></GuestDiet>
+              <Error>{guest.errors?.dietReqsError}</Error>
+            </div>
+          </Guest>
+        ))}
+        <Button
+          onClick={() => {
+            submitForm();
           }}
-          error={getFormError("doubleCheck")}
-        />
-      )}
-
-      {answer === "true" && (
-        <>
-          <Input
-            type="radio"
-            label="Does anybody have dietary requirements?"
-            options={[
-              { label: "yes", value: "true" },
-              { label: "no", value: "false" },
-            ]}
-            name={"dietreqs"}
-            value={hasDietReqs}
-            onChange={(val: string) => {
-              setHasDietReqs(val);
-              console.log(val);
-            }}
-            error={getFormError("hasDietReqs")}
-          />
-        </>
-      )}
-
-      {hasDietReqs === "true" && (
-        <Textarea
-          label="Message"
-          onChange={(val: string) => {
-            setDietReqs(val);
-          }}
-          placeholder="Enter any dietary requirements"
-          style={{ minWidth: rem(460), minHeight: rem(240) }}
-          error={getFormError("dietReqs")}
-        />
-      )}
-
-      <Button
-        isLoading={isSubmitting}
-        onClick={handleSubmit}
-        disabled={submitDisabled}
-      >
-        Submit RSVP
-      </Button>
+          isLoading={isSubmitting}
+        >
+          Submit
+        </Button>
+      </Section>
     </RsvpPage>
   );
 };
 
-export default Message;
+export default Rsvp;
