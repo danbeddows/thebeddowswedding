@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Guest } from "pages/rsvp";
 
 /*
  * Config AWS
@@ -11,6 +12,7 @@ AWS.config.update({
 });
 
 interface Error {
+  guest?: number;
   type: string;
   message: string;
 }
@@ -35,27 +37,62 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   errors = undefined;
   let status = "failed";
 
-  const names = req.body.names;
-  const decision = req.body.decision;
-  const dietReqs = req.body.dietReqs;
+  const guests: Guest[] = req.body;
 
-  if (!names) {
-    addError({ type: "names", message: "Enter the names of your party." });
-  } else if (names.length > 1000) {
-    addError({ type: "names", message: "Too many people are coming, sorry!" });
+  res.json(guests);
+
+  // Check guests is an object with >= 1 in length
+  if (!guests) {
+    addError({ type: "internal", message: "Invalid payload." });
   }
 
-  if (decision !== false && decision !== true) {
-    addError({
-      type: "decision",
-      message: "Enter whether you will be joining us or not.",
-    });
+  if (typeof guests != "object") {
+    addError({ type: "internal", message: "Invalid payload." });
+  } else if (guests.length <= 0 || guests.length > 10) {
+    addError({ type: "internal", message: "Invalid payload." });
   }
 
-  if (dietReqs.length > 5000) {
-    addError({
-      type: "dietReqs",
-      message: "There is nothing possible to eat, sorry!",
+  if (!errors) {
+    guests.forEach((guest, index) => {
+      if (guest.name === "") {
+        addError({ guest: index, type: "name", message: "Invalid payload." });
+      } else if (guest.name.length > 100) {
+        addError({
+          guest: index,
+          type: "name",
+          message: "This guests name is too long. Sorry! :(",
+        });
+      }
+
+      if (guest.willAttend === "-1") {
+        addError({
+          guest: index,
+          type: "willAttend",
+          message: "Select whether attending.",
+        });
+      }
+
+      if (guest.phone === "") {
+        addError({
+          guest: index,
+          type: "phone",
+          message: "Enter phone number.",
+        });
+      } else if (guest.phone.length > 30) {
+        addError({
+          guest: index,
+          type: "phone",
+          message: "Enter valid phone number",
+        });
+      }
+
+      if (guest.dietReqs.length > 300) {
+        addError({
+          guest: index,
+          type: "dietReqs",
+          message: "Too many diet requirements, sorry!",
+        });
+      }
     });
   }
 
@@ -68,7 +105,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
         Body: {
           Html: {
             Charset: "UTF-8",
-            Data: formatMessage(names, decision, dietReqs),
+            Data: formatMessage(guests),
           },
           Text: {
             Charset: "UTF-8",
@@ -107,18 +144,24 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-const formatMessage = (names: string, decision: boolean, dietReqs: string) => {
+const formatMessage = (guests: Guest[]) => {
   let content = "<h1>New Wedding RSVP</h1><br/><br/>";
 
-  content += `<h2>Names</h2> <p>${names}</p><br/><br/>`;
+  guests.forEach((guest) => {
+    content += `<hr/><h2>${guest.name}</h2> <br/>`;
 
-  content += `<h2>Decision</h2> <p>${
-    decision ? "We would love to attend" : "We will NOT be attending."
-  }</p><br/><br/>`;
+    content += `<p>${
+      guest.willAttend === "yes"
+        ? "Will be attending"
+        : "Will NOT be attending."
+    }</p><br/>`;
 
-  if (decision && dietReqs != "") {
-    content += `<h2>Dietary requirements</h2> <p>${dietReqs}</p><br/><br/>`;
-  }
+    content += `<p>My phone number is <b>${guest.phone}</b></p><br/>`;
+
+    if (guest.willAttend === "yes" && guest.dietReqs != "") {
+      content += `<p>${guest.dietReqs}</p><br/><br/>`;
+    }
+  });
 
   return `<html><body>${content}</body></html>`;
 };

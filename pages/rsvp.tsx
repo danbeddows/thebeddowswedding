@@ -8,15 +8,18 @@ import {
   Error,
   Guest,
   GuestDecision,
-  GuestDelete,
+  GuestDesktopDelete,
   GuestDiet,
   GuestHeader,
+  GuestMobileDelete,
+  GuestMobileHeading,
+  GuestMobileTitle,
   GuestName,
   GuestPhone,
   RsvpPage,
 } from "./rsvp.styles";
 
-interface Guest {
+export interface Guest {
   name: string;
   dietReqs: string;
   phone: string;
@@ -52,8 +55,6 @@ const Rsvp = () => {
         });
       }
     }
-
-    console.log(guests);
 
     setLastGuestCount(guests.length);
   }, [guests]);
@@ -124,6 +125,40 @@ const Rsvp = () => {
 
     if (!hasError) {
       setIsSubmitting(true);
+
+      const data = guests.map((guest) => {
+        return {
+          name: guest.name,
+          willAttend: guest.willAttend,
+          dietReqs: guest.dietReqs,
+          phone: guest.phone,
+        };
+      });
+
+      fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.status == "success") {
+            // Show message + trigger scroll
+            setIsSubmitting(false);
+            setFormSubmitted(true);
+          } else if (response.status == "failed") {
+            console.log(response.errors);
+            setIsSubmitting(false);
+            alert("An unknown error occured, please try again later.");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsSubmitting(false);
+        });
     }
   };
 
@@ -182,7 +217,6 @@ const Rsvp = () => {
         </Paragraph>
       </Section>
       <Section>
-        {" "}
         <Paragraph>
           Please add the details of everyone in your party below.
         </Paragraph>
@@ -197,59 +231,73 @@ const Rsvp = () => {
           <div>Dietary requirements</div>
         </Guest>
         {guests.map((guest, n) => (
-          <Guest key={n}>
-            <div>
-              <GuestName
-                type="text"
-                value={guest.name}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  updateGuestValue(n, "name", e?.currentTarget.value);
-                }}
-                placeholder="Enter Name"
-                ref={guest.nameRef}
-              />
-              <Error>{guest.errors?.nameError}</Error>
-              <GuestDelete
-                onClick={() => {
-                  deleteGuest(n);
-                }}
-              >
-                Remove guest
-              </GuestDelete>
-            </div>
-            <div>
-              <GuestDecision
-                onChange={(e: React.FormEvent<HTMLSelectElement>) => {
-                  updateGuestValue(n, "willAttend", e?.currentTarget.value);
-                }}
-                value={guest.willAttend}
-              >
-                <option value="-1">Please select.</option>
-                <option value="yes">Yes, can't wait!</option>
-                <option value="no">Sorry, can't make it.</option>
-              </GuestDecision>
-              <Error>{guest.errors?.willAttendError}</Error>
-            </div>
-            <div>
-              <GuestPhone
-                value={guest.phone}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  updateGuestValue(n, "phone", e?.currentTarget.value);
-                }}
-                placeholder="Enter phone"
-              />
-              <Error>{guest.errors?.phoneError}</Error>
-            </div>
-            <div>
-              <GuestDiet
-                placeholder="e.g vegeterian, gluten free, etc"
-                onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
-                  updateGuestValue(n, "dietReqs", e?.currentTarget.value);
-                }}
-              ></GuestDiet>
-              <Error>{guest.errors?.dietReqsError}</Error>
-            </div>
-          </Guest>
+          <>
+            <GuestMobileTitle>Guest {n + 1}</GuestMobileTitle>
+            <Guest key={n}>
+              <div>
+                <GuestMobileHeading>Name</GuestMobileHeading>
+                <GuestName
+                  type="text"
+                  value={guest.name}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    updateGuestValue(n, "name", e?.currentTarget.value);
+                  }}
+                  placeholder="Enter Name"
+                  ref={guest.nameRef}
+                />
+                <Error>{guest.errors?.nameError}</Error>
+                <GuestDesktopDelete
+                  onClick={() => {
+                    deleteGuest(n);
+                  }}
+                >
+                  Remove guest
+                </GuestDesktopDelete>
+              </div>
+              <div>
+                <GuestMobileHeading>Attending?</GuestMobileHeading>
+                <GuestDecision
+                  onChange={(e: React.FormEvent<HTMLSelectElement>) => {
+                    updateGuestValue(n, "willAttend", e?.currentTarget.value);
+                  }}
+                  value={guest.willAttend}
+                >
+                  <option value="-1">Please select.</option>
+                  <option value="yes">Yes, can't wait!</option>
+                  <option value="no">Sorry, can't make it.</option>
+                </GuestDecision>
+                <Error>{guest.errors?.willAttendError}</Error>
+              </div>
+              <div>
+                <GuestMobileHeading>Phone number</GuestMobileHeading>
+                <GuestPhone
+                  value={guest.phone}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    updateGuestValue(n, "phone", e?.currentTarget.value);
+                  }}
+                  placeholder="Enter phone"
+                />
+                <Error>{guest.errors?.phoneError}</Error>
+              </div>
+              <div>
+                <GuestMobileHeading>Dietary requirements?</GuestMobileHeading>
+                <GuestDiet
+                  placeholder="e.g vegeterian, gluten free, etc"
+                  onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
+                    updateGuestValue(n, "dietReqs", e?.currentTarget.value);
+                  }}
+                ></GuestDiet>
+                <Error>{guest.errors?.dietReqsError}</Error>
+              </div>
+            </Guest>
+            <GuestMobileDelete
+              onClick={() => {
+                deleteGuest(n);
+              }}
+            >
+              Remove {guest.name !== "" ? guest.name : "guest"}
+            </GuestMobileDelete>
+          </>
         ))}
         <Button
           onClick={() => {

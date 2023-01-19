@@ -1,5 +1,4 @@
 import { rem } from "polished";
-import Section from "src/components/Section";
 import styled from "styled-components";
 
 export const VenueHeroArrow = styled.div`
