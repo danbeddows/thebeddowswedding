@@ -61,7 +61,10 @@ const Header = () => {
   };
 
   const pageUsesHeaderBackground = () => {
-    if (router.pathname == "/venue" && (headerLinks.length > 0 || showLogo)) {
+    if (
+      (router.pathname == "/venue" || router.pathname == "/gifts") &&
+      (headerLinks.length > 0 || showLogo)
+    ) {
       return true;
     }
 
