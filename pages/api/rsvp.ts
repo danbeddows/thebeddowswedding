@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Guest } from "pages/rsvp";
+import { GuestWithoutForm } from "pages/rsvp";
 
 /*
  * Config AWS
@@ -37,9 +37,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   errors = undefined;
   let status = "failed";
 
-  const guests: Guest[] = req.body;
-
-  res.json(guests);
+  const guests: GuestWithoutForm[] = req.body;
 
   // Check guests is an object with >= 1 in length
   if (!guests) {
@@ -99,7 +97,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!errors) {
     const emailParams = {
       Destination: {
-        ToAddresses: [process.env.RSVP_EMAIL_TO],
+        ToAddresses: process.env.RSVP_EMAIL_TO?.split(","),
       },
       Message: {
         Body: {
@@ -129,7 +127,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
       .catch(function (err: any) {
         addError({
           type: "internal",
-          message: "An unknown error occured. Please try again later.",
+          message: "An unknown error occured. Please try again later." + err,
         });
       });
 
@@ -144,7 +142,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-const formatMessage = (guests: Guest[]) => {
+const formatMessage = (guests: GuestWithoutForm[]) => {
   let content = "<h1>New Wedding RSVP</h1><br/><br/>";
 
   guests.forEach((guest) => {

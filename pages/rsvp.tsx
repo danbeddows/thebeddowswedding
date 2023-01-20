@@ -17,9 +17,10 @@ import {
   GuestName,
   GuestPhone,
   RsvpPage,
+  Thankyou,
 } from "./rsvp.styles";
 
-export interface Guest {
+interface Guest {
   name: string;
   dietReqs: string;
   phone: string;
@@ -32,6 +33,8 @@ export interface Guest {
     willAttendError?: string;
   };
 }
+
+export type GuestWithoutForm = Omit<Guest, "nameRef" | "errors">;
 
 const Rsvp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -146,9 +149,15 @@ const Rsvp = () => {
         .then((response) => response.json())
         .then((response) => {
           if (response.status == "success") {
-            // Show message + trigger scroll
             setIsSubmitting(false);
             setFormSubmitted(true);
+            setTimeout(() => {
+              window.scrollTo({
+                left: 0,
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              });
+            });
           } else if (response.status == "failed") {
             console.log(response.errors);
             setIsSubmitting(false);
@@ -197,10 +206,32 @@ const Rsvp = () => {
 
   const deleteGuest = (index: number) => {
     setGuests(
-      guests.filter((guest, n) => {
+      guests.filter((_, n) => {
         return n !== index;
       })
     );
+  };
+
+  const getTurnoutMessage = () => {
+    const turnout =
+      guests.filter((guest) => guest.willAttend === "yes").length /
+      guests.length;
+
+    if (turnout === 1 && guests.length === 1) {
+      return "We can't wait to see you!";
+    } else if (turnout === 1 && guests.length === 2) {
+      return "We can't wait to see you both!";
+    } else if (turnout === 1 && guests.length > 2) {
+      return "We can't wait to see you all!";
+    }
+
+    if (turnout === 0) {
+      return "We're sorry you can't make it, thanks for letting us know.";
+    }
+
+    if (turnout < 1 && turnout > 0) {
+      return "Thanks for letting us know.";
+    }
   };
 
   return (
@@ -222,7 +253,16 @@ const Rsvp = () => {
         </Paragraph>
         <GuestHeader>
           <h2>Guests</h2>
-          <Button onClick={newGuest}>Add another guest</Button>
+          {!formSubmitted && (
+            <Button
+              onClick={() => {
+                newGuest();
+              }}
+              disabled={isSubmitting}
+            >
+              Add another guest
+            </Button>
+          )}
         </GuestHeader>
         <Guest isHeader key={-1}>
           <div>Name</div>
@@ -244,15 +284,18 @@ const Rsvp = () => {
                   }}
                   placeholder="Enter Name"
                   ref={guest.nameRef}
+                  disabled={isSubmitting}
                 />
                 <Error>{guest.errors?.nameError}</Error>
-                <GuestDesktopDelete
-                  onClick={() => {
-                    deleteGuest(n);
-                  }}
-                >
-                  Remove guest
-                </GuestDesktopDelete>
+                {guests.length > 1 && !isSubmitting && !formSubmitted && (
+                  <GuestDesktopDelete
+                    onClick={() => {
+                      deleteGuest(n);
+                    }}
+                  >
+                    Remove guest
+                  </GuestDesktopDelete>
+                )}
               </div>
               <div>
                 <GuestMobileHeading>Attending?</GuestMobileHeading>
@@ -261,6 +304,7 @@ const Rsvp = () => {
                     updateGuestValue(n, "willAttend", e?.currentTarget.value);
                   }}
                   value={guest.willAttend}
+                  disabled={isSubmitting}
                 >
                   <option value="-1">Please select.</option>
                   <option value="yes">Yes, can't wait!</option>
@@ -276,6 +320,7 @@ const Rsvp = () => {
                     updateGuestValue(n, "phone", e?.currentTarget.value);
                   }}
                   placeholder="Enter phone"
+                  disabled={isSubmitting}
                 />
                 <Error>{guest.errors?.phoneError}</Error>
               </div>
@@ -286,17 +331,20 @@ const Rsvp = () => {
                   onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
                     updateGuestValue(n, "dietReqs", e?.currentTarget.value);
                   }}
+                  disabled={isSubmitting}
                 ></GuestDiet>
                 <Error>{guest.errors?.dietReqsError}</Error>
               </div>
             </Guest>
-            <GuestMobileDelete
-              onClick={() => {
-                deleteGuest(n);
-              }}
-            >
-              Remove {guest.name !== "" ? guest.name : "guest"}
-            </GuestMobileDelete>
+            {guests.length > 1 && !isSubmitting && !formSubmitted && (
+              <GuestMobileDelete
+                onClick={() => {
+                  deleteGuest(n);
+                }}
+              >
+                Remove {guest.name !== "" ? guest.name : "guest"}
+              </GuestMobileDelete>
+            )}
           </>
         ))}
         <Button
@@ -304,9 +352,16 @@ const Rsvp = () => {
             submitForm();
           }}
           isLoading={isSubmitting}
+          disabled={formSubmitted}
         >
           Submit
         </Button>
+        {formSubmitted && (
+          <Thankyou>
+            <Subheading>Thanks for your response</Subheading>
+            It's safely been delivered. {getTurnoutMessage()}
+          </Thankyou>
+        )}
       </Section>
     </RsvpPage>
   );
