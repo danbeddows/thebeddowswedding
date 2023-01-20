@@ -18,7 +18,7 @@ import {
   GuestPhone,
   RsvpPage,
   Thankyou,
-} from "./rsvp.styles";
+} from "../src/styles/pages/rsvp.styles";
 
 interface Guest {
   name: string;

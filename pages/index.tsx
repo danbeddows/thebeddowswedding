@@ -6,7 +6,7 @@ import {
   SubtextDesktop,
   SubtextMobile,
   WelcomeTile,
-} from "./index.styles";
+} from "../src/styles/pages/index.styles";
 
 const Index = () => {
   const numDays = differenceInCalendarDays(new Date("2023/04/22"), Date.now());
