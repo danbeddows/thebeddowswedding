@@ -133,7 +133,7 @@ const handleRsvpForm = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // Add arbitary thread pause, so the request doesn't
     // seem broken
-    await sleep(2000);
+    await sleep(1200);
   }
 
   res.json({
