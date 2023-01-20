@@ -75,7 +75,7 @@ const MobileLinks = styled.div<MobileLinksProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--light-blue);
+  background: var(--mid-blue);
   top: -20px;
   left: 0;
   z-index: 1010;
