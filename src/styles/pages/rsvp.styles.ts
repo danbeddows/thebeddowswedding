@@ -14,10 +14,10 @@ export const RsvpPage = styled.div`
     :before {
       content: "";
       position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
+      width: 100%;
+      height: 100%;
+      top: -50px;
+      left: 0px;
       z-index: -1;
       background: transparent url("/img/pages/rsvp/bg.png") no-repeat;
       background-position: top right;
