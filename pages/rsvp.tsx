@@ -46,11 +46,11 @@ const Rsvp = () => {
   useEffect(() => {
     // if guest count has increased, scroll to bottom and click new element
     if (guests.length > lastGuestCount) {
-      // Focus on latest input
-      const createdGuest = guests[guests.length - 1];
-      createdGuest.nameRef?.current?.focus();
-
       if (guests.length > 1) {
+        // Focus on latest input
+        const createdGuest = guests[guests.length - 1];
+        createdGuest.nameRef?.current?.focus();
+
         window.scrollTo({
           left: 0,
           top: document.body.scrollHeight,
