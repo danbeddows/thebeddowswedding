@@ -1,6 +1,9 @@
 import accomList from "src/accommodationList";
 import Hotel from "src/components/pages/accomodation/Hotel";
-import { AccomList, AccommodationPage } from "./accommodation.styles";
+import {
+  AccomList,
+  AccommodationPage,
+} from "../src/styles/pages/accommodation.styles";
 
 const Accommodation = () => {
   return (

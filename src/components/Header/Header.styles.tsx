@@ -100,7 +100,7 @@ const MobileMenuButtonContainer = styled.div`
 interface DesktopHeaderLinkProps {
   selected?: boolean;
 }
-const headerLinkColour = String(cssVar("--green", "#9fbfB0"));
+const headerLinkColour = String(cssVar("--orange", "#be9279"));
 const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   text-decoration: none;
   margin: ${rem(12)};
@@ -111,13 +111,13 @@ const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   transition: 0.1s color;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    color: ${(props) => (props.selected ? "var(--dark-blue)" : "var(--black)")};
+    color: ${(props) => (props.selected ? "var(--orange)" : "var(--black)")};
     margin: 0 ${rem(16)};
     font-size: ${rem(18)};
   }
 
   &:hover {
-    color: var(--dark-blue);
+    color: var(--orange);
   }
 `;
 

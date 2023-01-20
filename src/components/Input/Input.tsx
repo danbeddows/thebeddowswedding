@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import {
   InputContainer,
+  RadioOption,
+  RadioOptionLabel,
   StyledError,
+  StyledHeader,
   StyledInput,
-  StyledLabel
+  StyledLabel,
 } from "./Input.styles";
 
 interface InputProps {
-  type?: "text";
+  type?: "text" | "radio";
   label: string;
   placeholder?: string;
   onChange: (newValue: string) => void;
   style?: {};
+  name?: string;
+  options?: { label: string; value: any }[];
   value?: string;
   className?: string;
   error?: string;
@@ -22,10 +27,12 @@ const Input: React.FC<InputProps> = ({
   label,
   placeholder,
   onChange,
+  options = [],
   style,
+  name = "",
   value = "",
   className = "",
-  error = ""
+  error = "",
 }) => {
   const [internalValue, setInternalValue] = useState("");
 
@@ -42,17 +49,43 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <InputContainer>
-      <StyledLabel>
-        <div>{label}</div>
-        <StyledInput
-          type={type}
-          value={internalValue}
-          onChange={handleChange}
-          placeholder={placeholder}
-          style={style}
-          className={className}
-        />
-      </StyledLabel>
+      {type !== "radio" && (
+        <StyledLabel>
+          <StyledHeader>{label}</StyledHeader>
+          <StyledInput
+            type={type}
+            value={internalValue}
+            onChange={handleChange}
+            placeholder={placeholder}
+            style={style}
+            className={className}
+          />
+        </StyledLabel>
+      )}
+      {type === "radio" && (
+        <>
+          <StyledHeader>{label}</StyledHeader>
+          {options.map((option, index) => (
+            <StyledLabel>
+              <RadioOption>
+                <StyledInput
+                  type={type}
+                  value={option.value}
+                  onChange={handleChange}
+                  placeholder={placeholder}
+                  style={style}
+                  className={className}
+                  key={index}
+                  name={name}
+                  checked={value == option.value}
+                />{" "}
+                <RadioOptionLabel>{option.label}</RadioOptionLabel>
+              </RadioOption>
+            </StyledLabel>
+          ))}
+        </>
+      )}
+
       <StyledError>{error}</StyledError>
     </InputContainer>
   );

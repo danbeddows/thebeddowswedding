@@ -47,8 +47,8 @@ const Header = () => {
     { url: "/", label: "Home" },
     { url: "/venue", label: "Venue" },
     { url: "/accommodation", label: "Accommodation" },
+    { url: "/rsvp", label: "RSVP" },
     { url: "/gifts", label: "Gifts" },
-    // { url: "/message", label: "Message Us" },
   ]);
 
   const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);
@@ -61,7 +61,7 @@ const Header = () => {
   };
 
   const pageUsesHeaderBackground = () => {
-    if (router.pathname == "/venue") {
+    if (router.pathname == "/venue" && (headerLinks.length > 0 || showLogo)) {
       return true;
     }
 
@@ -103,20 +103,24 @@ const Header = () => {
         ))}
       </DesktopLinkWrapper>
       <MobileLinkWrapper>
-        <MobileMenuButtonContainer onClick={onMobileMenuClick}>
-          <FontAwesomeIcon icon={faBars} size={"2x"} />
-        </MobileMenuButtonContainer>
-        <MobileLinks visible={isMobileLinksVisible}>
-          {headerLinks.map((link, index) => (
-            <HeaderLink
-              url={link.url}
-              label={link.label}
-              selected={link.selected}
-              key={index}
-              onClick={closeMobileMenu}
-            />
-          ))}
-        </MobileLinks>
+        {headerLinks.length > 0 && (
+          <>
+            <MobileMenuButtonContainer onClick={onMobileMenuClick}>
+              <FontAwesomeIcon icon={faBars} size={"2x"} />
+            </MobileMenuButtonContainer>
+            <MobileLinks visible={isMobileLinksVisible}>
+              {headerLinks.map((link, index) => (
+                <HeaderLink
+                  url={link.url}
+                  label={link.label}
+                  selected={link.selected}
+                  key={index}
+                  onClick={closeMobileMenu}
+                />
+              ))}
+            </MobileLinks>
+          </>
+        )}
       </MobileLinkWrapper>
     </HeaderWrapper>
   );
