@@ -26,7 +26,7 @@ const Index = () => {
         <SubtextMobile>
           12th May 2023
           <br />
-          Owen Barn Wedding House | Knutsford
+          Owen House Wedding Barn | Knutsford
         </SubtextMobile>
         <SubtextDesktop>
           12th May 2023 | Owen House Wedding Barn | Knutsford
