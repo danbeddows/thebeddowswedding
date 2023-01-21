@@ -69,14 +69,14 @@ interface MobileLinksProps {
 
 const MobileLinks = styled.div<MobileLinksProps>`
   width: 100%;
-  height: 100vh;
-  position: absolute;
+  min-height: 100vh;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--mid-blue);
-  top: -20px;
+  top: -0px;
   left: 0;
   z-index: 1010;
   margin-top: -100vh;

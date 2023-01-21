@@ -39,6 +39,13 @@ const GlobalStyles = createGlobalStyle`
 	#__next {
 		height: 100%;
 	}
+
+	@supports (-webkit-touch-callout: none) {
+		body {
+			/* The hack for Safari */
+			height: -webkit-fill-available;
+		}
+	}
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
