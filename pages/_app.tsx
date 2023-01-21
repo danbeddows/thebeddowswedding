@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const aboutTitle = "The Benn Wedding";
   const aboutDomain = "thebennwedding.com";
   const aboutUrl = `https://www.${aboutDomain}`;
-  const aboutDescription = "Tom & Catherine are getting married in 2023 🎉";
+  const aboutDescription = "Catherine & Tom are getting married in 2023 🎉";
   const aboutImgUrl = `${process.env.NEXT_PUBLIC_ASSET_SERVER}/img/og.png`;
 
   return (
