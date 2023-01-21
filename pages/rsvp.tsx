@@ -306,7 +306,7 @@ const Rsvp = () => {
                   value={guest.willAttend}
                   disabled={isSubmitting}
                 >
-                  <option value="-1">Please select.</option>
+                  <option value="-1">Please select</option>
                   <option value="yes">Yes, can't wait!</option>
                   <option value="no">Sorry, can't make it.</option>
                 </GuestDecision>
