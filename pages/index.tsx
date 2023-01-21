@@ -20,7 +20,7 @@ const Index = () => {
 
   return (
     <WelcomeTile>
-      <MarriedNames>Tom & Catherine</MarriedNames>
+      <MarriedNames>Catherine & Tom</MarriedNames>
       <InfoSubtext>
         <SubtextMobile>
           12th May 2023
@@ -28,7 +28,7 @@ const Index = () => {
           Owen Barn Wedding House | Knutsford
         </SubtextMobile>
         <SubtextDesktop>
-          12th May 2023 | Owen Barn Wedding House | Knutsford
+          12th May 2023 | Owen House Wedding Barn | Knutsford
         </SubtextDesktop>
         <DaysToGo>{message}</DaysToGo>
       </InfoSubtext>

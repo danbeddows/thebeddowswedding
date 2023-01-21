@@ -61,7 +61,7 @@ const Header = () => {
   };
 
   const pageUsesHeaderBackground = () => {
-    if (router.pathname == "/" && (headerLinks.length > 0 || showLogo)) {
+    if (router.pathname == "" && (headerLinks.length > 0 || showLogo)) {
       return true;
     }
 
@@ -90,7 +90,7 @@ const Header = () => {
       <InfoWrapper>
         <Link href="/" passHref={true}>
           <OurNames>
-            {showLogo ? <>Tom &amp; Catherine</> : <>&nbsp;</>}
+            {showLogo ? <>Catherine &amp; Tom</> : <>&nbsp;</>}
           </OurNames>
         </Link>
       </InfoWrapper>

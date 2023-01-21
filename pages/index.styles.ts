@@ -16,22 +16,24 @@ export const WelcomeTile = styled.section`
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
-    background-position: center center;
+    background-position: center;
     align-items: flex-end;
     justify-content: center;
+    background-size: cover;
   }
 
   @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
     background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
-    background-position: left center;
+    background-position: center;
     align-items: flex-end;
     justify-content: center;
+    background-size: cover;
   }
 `;
 
 export const MarriedNames = styled.h1`
-  font-family: "roboto";
+  font-family: "script-mt";
   font-weight: 400;
   color: #1a1a1a;
   font-size: ${rem(100)};
@@ -42,7 +44,7 @@ export const MarriedNames = styled.h1`
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     display: block;
-    font-size: ${rem(68)};
+    font-size: ${rem(82)};
     line-height: ${rem(106)};
   }
 `;
@@ -53,19 +55,19 @@ export const InfoSubtext = styled.h4`
   letter-spacing: 1px;
   line-height: ${rem(24)};
   text-transform: uppercase;
-  font-size: ${rem(14)};
+  font-size: ${rem(18)};
   font-weight: 500;
   text-align: left;
-  margin-top: 320px;
+  margin-top: 220px;
   display: block;
   margin-bottom: 200px;
   text-align: left;
   letter-spacing: 1px;
-  color: #fff;
+  color: #000;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    margin: ${rem(40)} 0 20px;
-    font-size: ${rem(14)};
+    margin: ${rem(10)} 0 20px;
+    font-size: ${rem(18)};
     line-height: ${rem(24)};
     text-align: right;
     color: #000;

@@ -5,8 +5,8 @@ import {
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Header from "src/components/Header";
-import { fontNow } from "src/styles/fontNow";
-import { fontRoboto } from "src/styles/fontRoboto";
+import { fontPerpetua } from "src/styles/fontPerpetua";
+import { fontScriptMt } from "src/styles/fontScriptMt";
 import { Theme, ThemeGlobals } from "src/styles/global";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 
@@ -17,8 +17,8 @@ const assetDomain =
     ? process.env.NEXT_PUBLIC_ASSET_SERVER
     : "";
 
-const FontRobotoStyle = fontRoboto(assetDomain);
-const FontNowStyle = fontNow(assetDomain);
+const FontScriptMtStyle = fontScriptMt(assetDomain);
+const FontPerpetuaStyle = fontPerpetua(assetDomain);
 
 const GlobalStyles = createGlobalStyle`
 	html, body {
@@ -77,8 +77,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <ThemeGlobals />
-      <FontRobotoStyle />
-      <FontNowStyle />
+      <FontScriptMtStyle />
+      <FontPerpetuaStyle />
       <ThemeProvider theme={Theme}>
         <Header />
         <Component {...pageProps} />

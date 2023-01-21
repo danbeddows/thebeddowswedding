@@ -35,15 +35,16 @@ const InfoWrapper = styled.div`
 `;
 
 const OurNames = styled.a`
-  font-family: "Roboto";
+  font-family: "script-mt";
   font-weight: 400;
-  font-size: ${rem(26)};
+  font-size: ${rem(28)};
   margin: 0;
   text-decoration: none;
   color: #000;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     font-size: ${rem(48)};
+    color: #000;
   }
 `;
 
