@@ -251,6 +251,11 @@ const Rsvp = () => {
         <Paragraph>
           Please add the details of everyone in your party below.
         </Paragraph>
+        <Paragraph>
+          <span style={{ fontWeight: 600 }}>Note:</span> We're asking for the
+          mobile numbers of all adults so we can send you a link nearer the time
+          with our menu, and the wedding programme. No spam, we promise!
+        </Paragraph>
         <GuestHeader>
           <h2>Guests</h2>
           {!formSubmitted && (
