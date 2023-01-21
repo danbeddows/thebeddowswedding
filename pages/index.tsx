@@ -3,6 +3,7 @@ import {
   DaysToGo,
   InfoSubtext,
   MarriedNames,
+  MoreInfoSoon,
   SubtextDesktop,
   SubtextMobile,
   WelcomeTile,
@@ -31,6 +32,7 @@ const Index = () => {
           12th May 2023 | Owen House Wedding Barn | Knutsford
         </SubtextDesktop>
         <DaysToGo>{message}</DaysToGo>
+        <MoreInfoSoon>More information to follow shortly.</MoreInfoSoon>
       </InfoSubtext>
     </WelcomeTile>
   );
