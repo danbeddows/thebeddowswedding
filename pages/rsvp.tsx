@@ -287,7 +287,7 @@ const Rsvp = () => {
                   onChange={(e: React.FormEvent<HTMLInputElement>) => {
                     updateGuestValue(n, "name", e?.currentTarget.value);
                   }}
-                  placeholder="Enter Name"
+                  placeholder="Enter name"
                   ref={guest.nameRef}
                   disabled={isSubmitting}
                 />
