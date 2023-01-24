@@ -49,7 +49,7 @@ const holidayInnExpress: HotelProps = {
 };
 
 const cottonsHotelAndSpa: HotelProps = {
-  name: "Cotton's Hotel & Spa",
+  name: "Cottons Hotel & Spa",
   link: {
     url: "https://www.cottonshotel.co.uk/",
   },
