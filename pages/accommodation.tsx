@@ -12,10 +12,7 @@ const Accommodation = () => {
         {accomList.map((accom, index) => (
           <Hotel
             name={accom.name}
-            description={accom.description}
-            priceEstimate={accom.priceEstimate}
             link={accom.link}
-            bookingLinks={accom.bookingLinks}
             image={accom.image}
             key={index}
             appleMaps={accom.appleMaps}
