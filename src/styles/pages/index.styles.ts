@@ -55,7 +55,7 @@ export const InfoSubtext = styled.h4`
   letter-spacing: 1px;
   line-height: ${rem(24)};
   text-transform: uppercase;
-  font-size: ${rem(18)};
+  font-size: ${rem(20)};
   font-weight: 500;
   text-align: left;
   margin-top: 220px;
@@ -64,6 +64,7 @@ export const InfoSubtext = styled.h4`
   text-align: left;
   letter-spacing: 1px;
   color: #000;
+  text-shadow: 0.5px 0.5px #999;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     margin: ${rem(10)} 0 20px;
