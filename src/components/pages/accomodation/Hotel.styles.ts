@@ -29,7 +29,7 @@ const HotelImage = styled.img`
 `;
 
 const HotelHeader = styled.div`
-  margin-top: 12px;
+  margin: 12px 0;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -40,26 +40,6 @@ const HotelName = styled.h2`
   font-size: ${rem(20)};
   font-weight: 500;
   padding: 0 22px;
-`;
-
-const HotelDescription = styled.p`
-  margin-bottom: 22px;
-  padding: 0 22px;
-  font-size: ${rem(15)};
-  line-height: 1.5;
-`;
-
-const HotelPriceEstimate = styled.p`
-  width: 84px;
-  padding: 5px 18px 0;
-`;
-
-const PriceEstimateActive = styled.span`
-  color: #444;
-`;
-
-const PriceEstimateDisabled = styled.span`
-  color: #ccc;
 `;
 
 const ActionContainer = styled.div`
@@ -127,62 +107,14 @@ const HotelLink = styled.a`
   justify-content: center;
 `;
 
-const HotelBookingHeader = styled.div`
-  background: #f5f5f5;
-  text-align: center;
-  padding: 20px 0 6px;
-`;
-
-const HotelBookingContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 6px 8px;
-  gap: 6px;
-  background: #f5f5f5;
-`;
-
-const BookingLinkContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e6e6e6;
-  border-radius: 3px;
-  padding: 10px;
-  flex: 1 1 auto;
-  height: 47px;
-  background: #fff;
-
-  &:hover {
-    background: #fafafa;
-  }
-`;
-
-const BookingLink = styled.a`
-  width: 100%;
-  height: 47px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export {
   HotelContainer,
   ActionContainer,
   Action,
-  HotelBookingHeader,
   HotelImage,
   HotelHeader,
   HotelName,
-  HotelDescription,
-  HotelPriceEstimate,
   HotelLink,
-  HotelBookingContainer,
-  BookingLinkContainer,
-  BookingLink,
-  PriceEstimateActive,
-  PriceEstimateDisabled,
   HotelTop,
   HotelBottom,
 };

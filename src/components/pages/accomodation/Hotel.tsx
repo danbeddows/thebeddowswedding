@@ -27,12 +27,9 @@ interface BookingLink {
 
 export interface HotelProps {
   name: string;
-  description: string;
-  priceEstimate: number;
   link: {
     url: string;
   };
-  bookingLinks: BookingLink[];
   image: string;
   appleMaps?: string;
   googleMaps?: string;
@@ -40,10 +37,7 @@ export interface HotelProps {
 
 const Hotel: React.FC<HotelProps> = ({
   name,
-  description,
-  priceEstimate,
   link,
-  bookingLinks,
   image,
   appleMaps,
   googleMaps,
@@ -54,19 +48,7 @@ const Hotel: React.FC<HotelProps> = ({
         <HotelImage src={image} />
         <HotelHeader>
           <HotelName>{name}</HotelName>
-          <HotelPriceEstimate>
-            {Array.apply(null, Array(4)).map((e, index) => {
-              if (index < priceEstimate) {
-                return <PriceEstimateActive key={index}>£</PriceEstimateActive>;
-              } else {
-                return (
-                  <PriceEstimateDisabled key={index}>£</PriceEstimateDisabled>
-                );
-              }
-            })}
-          </HotelPriceEstimate>
         </HotelHeader>
-        <HotelDescription>{description}</HotelDescription>
       </HotelTop>
       <HotelBottom>
         <ActionContainer>
@@ -91,41 +73,6 @@ const Hotel: React.FC<HotelProps> = ({
             </Action>
           )}
         </ActionContainer>
-        {bookingLinks.length > 0 && (
-          <>
-            <HotelBookingHeader>Book on:</HotelBookingHeader>
-            <HotelBookingContainer>
-              {bookingLinks.map((link, index) => {
-                return (
-                  <BookingLinkContainer>
-                    <BookingLink href={link.url} target="_blank">
-                      {link.type === "booking.com" && (
-                        <img
-                          src="/img/pages/accommodation/travelAgents/booking.com.svg"
-                          style={{ maxWidth: 88 }}
-                        />
-                      )}
-
-                      {link.type === "hotels.com" && (
-                        <img
-                          src="/img/pages/accommodation/travelAgents/hotels.com.svg"
-                          width={100}
-                        />
-                      )}
-
-                      {link.type === "expedia" && (
-                        <img
-                          src="/img/pages/accommodation/travelAgents/expedia.svg"
-                          width={74}
-                        />
-                      )}
-                    </BookingLink>
-                  </BookingLinkContainer>
-                );
-              })}
-            </HotelBookingContainer>
-          </>
-        )}
       </HotelBottom>
     </HotelContainer>
   );
