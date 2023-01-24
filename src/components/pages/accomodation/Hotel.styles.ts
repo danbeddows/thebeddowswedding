@@ -98,7 +98,7 @@ const HotelLink = styled.a`
   padding: 16px 18px;
   color: var(--dark-blue);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   font-weight: 500;
   display: flex;

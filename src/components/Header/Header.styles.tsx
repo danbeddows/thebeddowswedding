@@ -77,7 +77,7 @@ const MobileLinks = styled.div<MobileLinksProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--mid-blue);
+  background: #fff;
   top: -0px;
   left: 0;
   z-index: 1010;
@@ -102,7 +102,7 @@ const MobileMenuButtonContainer = styled.div`
 interface DesktopHeaderLinkProps {
   selected?: boolean;
 }
-const headerLinkColour = String(cssVar("--orange", "#be9279"));
+const headerLinkColour = String(cssVar("--green", "#9AC791"));
 const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   text-decoration: none;
   margin: ${rem(12)};
@@ -113,13 +113,13 @@ const HeaderLinkStyle = styled.a<DesktopHeaderLinkProps>`
   transition: 0.1s color;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    color: ${(props) => (props.selected ? "var(--orange)" : "var(--black)")};
+    color: ${(props) => (props.selected ? "var(--green)" : "var(--black)")};
     margin: 0 ${rem(16)};
     font-size: ${rem(18)};
   }
 
   &:hover {
-    color: var(--orange);
+    color: var(--green);
   }
 `;
 
