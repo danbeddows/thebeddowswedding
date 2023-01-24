@@ -13,7 +13,7 @@ import {
   VenueHeroArrow,
   VenueMap,
   VenuePage,
-} from "./venue.styles";
+} from "../src/styles/pages/venue.styles";
 
 const Venue = () => {
   return (

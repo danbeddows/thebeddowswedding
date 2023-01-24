@@ -7,6 +7,7 @@ interface ButtonProps {
   isLoading?: boolean;
   onClick: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,6 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   isLoading = false,
   className = "",
+  disabled = false,
 }) => {
   const btnRef = createRef<HTMLButtonElement>();
   const [isDisabled, setIsDisabled] = useState(false);
@@ -57,7 +59,7 @@ const Button: React.FC<ButtonProps> = ({
     <StyledButton
       ref={btnRef}
       type="button"
-      disabled={isDisabled}
+      disabled={isDisabled || disabled}
       onClick={handleOnClick}
       style={{ width }}
       className={className}

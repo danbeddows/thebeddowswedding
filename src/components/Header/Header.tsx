@@ -44,11 +44,11 @@ const Header = () => {
   const showLogo = !(windowDimensions.width > 768 && router.pathname === "/");
 
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
-    // { url: "/", label: "Home" },
+    { url: "/", label: "Home" },
     // { url: "/venue", label: "Venue" },
-    // { url: "/accommodation", label: "Accommodation" },
+    { url: "/accommodation", label: "Accommodation" },
+    // { url: "/rsvp", label: "RSVP" },
     // { url: "/gifts", label: "Gifts" },
-    // { url: "/message", label: "Message Us" },
   ]);
 
   const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);
