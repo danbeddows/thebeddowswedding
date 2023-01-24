@@ -4,8 +4,7 @@ import styled from "styled-components";
 export const WelcomeTile = styled.section`
   width: 100%;
   height: 100vh;
-  background: transparent url("/img/pages/landing/welcome-desktop.png")
-    no-repeat;
+  background: transparent url("/img/pages/landing/welcome-mobile.jpg") no-repeat;
   background-position: top left;
   background-size: cover;
   display: flex;
@@ -15,7 +14,7 @@ export const WelcomeTile = styled.section`
   padding: 0 ${rem(30)};
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    background: transparent url("/img/pages/landing/welcome-desktop.png")
+    background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
     background-position: center;
     align-items: flex-end;
@@ -24,7 +23,7 @@ export const WelcomeTile = styled.section`
   }
 
   @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
-    background: transparent url("/img/pages/landing/welcome-desktop.png")
+    background: transparent url("/img/pages/landing/welcome-desktop.jpg")
       no-repeat;
     background-position: center;
     align-items: flex-end;
