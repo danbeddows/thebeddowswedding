@@ -3,7 +3,7 @@ import { HotelProps } from "./components/pages/accomodation/Hotel";
 const theRoebuckInn: HotelProps = {
   name: "The Roebuck Inn",
   link: {
-    url: "https://www.roebuckinnmobberley.co.uk/",
+    url: "https://roebuckinnmobberley.co.uk/",
   },
   image: "/img/pages/accommodation/hotels/roebuck-inn.jpg",
   appleMaps:
