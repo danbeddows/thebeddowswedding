@@ -3,27 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Action,
   ActionContainer,
-  BookingLink,
-  BookingLinkContainer,
-  HotelBookingContainer,
-  HotelBookingHeader,
   HotelBottom,
   HotelContainer,
-  HotelDescription,
   HotelHeader,
   HotelImage,
   HotelLink,
   HotelName,
-  HotelPriceEstimate,
   HotelTop,
-  PriceEstimateActive,
-  PriceEstimateDisabled,
 } from "./Hotel.styles";
-
-interface BookingLink {
-  type: "booking.com" | "expedia" | "hotels.com";
-  url: string;
-}
 
 export interface HotelProps {
   name: string;
