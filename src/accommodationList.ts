@@ -12,6 +12,18 @@ const theRoebuckInn: HotelProps = {
     "https://www.google.com/maps/place/The+Roebuck+Inn/@53.3126094,-2.319796,17z/data=!3m1!4b1!4m8!3m7!1s0x487a53ba944689ff:0x3036b16ea17c3e64!5m2!4m1!1i2!8m2!3d53.3126488!4d-2.3176317",
 };
 
+const theHintonGuestHouse: HotelProps = {
+  name: "The Hinton Guest House",
+  link: {
+    url: "https://www.thehintonguesthouse.co.uk/",
+  },
+  image: "/img/pages/accommodation/hotels/hinton-guest-house.jpg",
+  appleMaps:
+    "https://maps.apple.com/?address=Town%20Lane,%20Mobberley,%20Knutsford,%20England&auid=1103980114382209360&ll=53.313112,-2.327492&lsp=9902&q=The%20Hinton%20Guest%20House&_ext=CjIKBQgEEOEBCgQIBRADCgQIBhALCgQIChAACgQIUhADCgQIVRAOCgQIWRABCgUIpAEQARImKfwZOVeKp0pAMbYxd43OsALAOXrvXrOwqEpAQUSXgEkDkgLAUAQ%3D",
+  googleMaps:
+    "https://www.google.com/maps/place/The+Hinton+Guest+House/@53.3130759,-2.3296918,17z/data=!3m1!4b1!4m8!3m7!1s0x487a53bd3a5e7573:0x536814022affb8fa!5m2!4m1!1i2!8m2!3d53.313075!4d-2.3276141",
+};
+
 const cottonsHotelAndSpa: HotelProps = {
   name: "Cotton's Hotel & Spa",
   link: {
@@ -24,6 +36,6 @@ const cottonsHotelAndSpa: HotelProps = {
     "https://www.google.com/maps/place/Cottons+Hotel+%26+Spa/@53.4740486,-2.5647201,10z/data=!3m1!5s0x487a5459997592e9:0xfa17aec95bf97d83!4m8!3m7!1s0x487a546a1c45944d:0xfe588544a4e35f7f!5m2!4m1!1i2!8m2!3d53.3194444!4d-2.3927778?shorturl=1",
 };
 
-const accomList = [theRoebuckInn, cottonsHotelAndSpa];
+const accomList = [theRoebuckInn, theHintonGuestHouse, cottonsHotelAndSpa];
 
 export default accomList;
