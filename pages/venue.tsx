@@ -26,7 +26,7 @@ const Venue = () => {
         <VenuePage>
           <VenueDetails>
             <PageHeading>Venue</PageHeading>
-            <Subheading>The Holford Estate</Subheading>
+            <Subheading>Owen House Wedding Barn</Subheading>
             <VenueAddress>
               Owen House Wedding Barn,
               <br />
