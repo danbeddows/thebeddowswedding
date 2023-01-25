@@ -17,7 +17,7 @@ export const VenueHeroArrow = styled.div`
 export const VenueHero = styled.section`
   width: 100%;
   height: 100vh;
-  background: transparent url("/img/pages/venue/the-holford-estate.jpg")
+  background: transparent url("/img/pages/venue/owen-house-wedding-barn.jpg")
     no-repeat;
   background-position: center bottom;
   background-size: cover;
@@ -28,7 +28,7 @@ export const VenueHero = styled.section`
   padding: 0 ${rem(30)};
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    background: transparent url("/img/pages/venue/the-holford-estate.jpg")
+    background: transparent url("/img/pages/venue/owen-house-wedding-barn.jpg")
       no-repeat;
     background-position: center center;
     background-size: cover;
@@ -37,7 +37,7 @@ export const VenueHero = styled.section`
   }
 
   @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
-    background: transparent url("/img/pages/venue/the-holford-estate.jpg")
+    background: transparent url("/img/pages/venue/owen-house-wedding-barn.jpg")
       no-repeat;
     background-position: center center;
     background-size: cover;

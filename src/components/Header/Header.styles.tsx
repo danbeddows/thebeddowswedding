@@ -41,10 +41,12 @@ const OurNames = styled.a`
   margin: 0;
   text-decoration: none;
   color: #000;
+  padding: 4px 0;
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
     font-size: ${rem(48)};
     color: #000;
+    padding: 0;
   }
 `;
 

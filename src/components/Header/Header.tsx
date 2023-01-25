@@ -45,7 +45,7 @@ const Header = () => {
 
   const [headerLinks, setHeaderLinks] = useState<HeaderLinkType[]>([
     { url: "/", label: "Home" },
-    // { url: "/venue", label: "Venue" },
+    { url: "/venue", label: "Venue" },
     { url: "/accommodation", label: "Accommodation" },
     // { url: "/rsvp", label: "RSVP" },
     // { url: "/gifts", label: "Gifts" },
@@ -61,7 +61,10 @@ const Header = () => {
   };
 
   const pageUsesHeaderBackground = () => {
-    if (router.pathname == "/" && (headerLinks.length > 0 || showLogo)) {
+    if (
+      (router.pathname == "/" || router.pathname == "/venue") &&
+      (headerLinks.length > 0 || showLogo)
+    ) {
       return true;
     }
 
