@@ -48,7 +48,7 @@ const Header = () => {
     { url: "/venue", label: "Venue" },
     { url: "/accommodation", label: "Accommodation" },
     { url: "/rsvp", label: "RSVP" },
-    // { url: "/gifts", label: "Gifts" },
+    { url: "/gifts", label: "Gifts" },
   ]);
 
   const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);
@@ -61,7 +61,10 @@ const Header = () => {
   };
 
   const pageUsesHeaderBackground = () => {
-    if (router.pathname == "/venue" && (headerLinks.length > 0 || showLogo)) {
+    if (
+      (router.pathname == "/venue" || router.pathname == "/gifts") &&
+      (headerLinks.length > 0 || showLogo)
+    ) {
       return true;
     }
 
