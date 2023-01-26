@@ -1,5 +1,9 @@
-import { faArrowDown } from "@fortawesome/pro-regular-svg-icons";
+import {
+  faArrowDown,
+  faArrowUpRightFromSquare,
+} from "@fortawesome/pro-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "src/components/Button";
 import PageHeading from "src/components/PageHeading/PageHeading";
 import Paragraph from "src/components/Paragraph";
 import Section from "src/components/Section";
@@ -36,6 +40,20 @@ const Gifts = () => {
             Hana, then Kauai to go to a Luau and explore the garden isle and
             finally Big Island to hike through the Volcano National Park and do
             a Kona coffee tour. We can’t wait!
+          </Paragraph>
+          <Paragraph>
+            <a
+              href="https://prezola.com/wishlists/10270430/3663762"
+              target="_blank"
+            >
+              <Button onClick={() => {}}>
+                Go to our honeymoon page{" "}
+                <FontAwesomeIcon
+                  icon={faArrowUpRightFromSquare}
+                  style={{ marginLeft: 2 }}
+                />
+              </Button>
+            </a>
           </Paragraph>
         </GiftPage>
       </Section>
