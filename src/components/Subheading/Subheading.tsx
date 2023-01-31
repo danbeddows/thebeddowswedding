@@ -15,11 +15,16 @@ const StyledH2 = styled.h2`
 
 interface SubheadingProps {
   className?: string;
+  style?: any;
   children: React.ReactNode;
 }
 
-const Subheading = ({ children, className }: SubheadingProps) => {
-  return <StyledH2 className={className}>{children}</StyledH2>;
+const Subheading = ({ children, className, style }: SubheadingProps) => {
+  return (
+    <StyledH2 className={className} style={style}>
+      {children}
+    </StyledH2>
+  );
 };
 
 export default Subheading;
