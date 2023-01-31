@@ -17,7 +17,7 @@ export const GiftsHeroArrow = styled.div`
 export const GiftsHero = styled.section`
   width: 100%;
   height: 100vh;
-  background: transparent url("/img/pages/gifts/hawaii.jpg") no-repeat;
+  background: transparent url("/img/pages/gifts/honeymoon.jpg") no-repeat;
   background-position: center bottom;
   background-size: cover;
   display: flex;
@@ -27,7 +27,7 @@ export const GiftsHero = styled.section`
   padding: 0 ${rem(30)};
 
   @media (min-width: ${(props) => props.theme.bp.tablet}) {
-    background: transparent url("/img/pages/gifts/hawaii.jpg") no-repeat;
+    background: transparent url("/img/pages/gifts/honeymoon.jpg") no-repeat;
     background-position: center center;
     background-size: cover;
     align-items: flex-end;
@@ -35,7 +35,7 @@ export const GiftsHero = styled.section`
   }
 
   @media (min-width: ${(props) => props.theme.bp.desktopLarge}) {
-    background: transparent url("/img/pages/gifts/hawaii.jpg") no-repeat;
+    background: transparent url("/img/pages/gifts/honeymoon.jpg") no-repeat;
     background-position: center center;
     background-size: cover;
     align-items: flex-end;
