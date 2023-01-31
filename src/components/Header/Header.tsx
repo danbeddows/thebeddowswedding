@@ -48,7 +48,7 @@ const Header = () => {
     { url: "/venue", label: "Venue" },
     { url: "/accommodation", label: "Accommodation" },
     // { url: "/rsvp", label: "RSVP" },
-    // { url: "/gifts", label: "Gifts" },
+    { url: "/gifts", label: "Gifts" },
   ]);
 
   const [isMobileLinksVisible, setIsMobileLinksVisible] = useState(false);

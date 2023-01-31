@@ -16,36 +16,30 @@ import {
 const Gifts = () => {
   return (
     <>
-      {" "}
       <GiftsHeroArrow>
         <FontAwesomeIcon icon={faArrowDown} />
       </GiftsHeroArrow>
       <GiftsHero />
       <Section>
         <GiftPage>
-          <PageHeading>Gifts</PageHeading>
+          <PageHeading>A note on gifts</PageHeading>
           <Paragraph>
-            We’re incredibly thankful to have everything we need, so we don’t
-            have a gift registry.{" "}
-          </Paragraph>
-          <Paragraph>You joining us to celebrate really is enough.</Paragraph>
-          <Paragraph>
-            But if you’d like to, you can help us create some new memories by
-            contributing to our honeymoon.
+            We’ve lived together a year or two,
+            <br />
+            we really don't need anything new.
           </Paragraph>
           <Paragraph>
-            In September 2023, we'll be setting off on an adventure around
-            Hawaii. We'll be going to O'ahu to see Pearl Harbour and hike up
-            Diamond Head, then to Maui to hit the beach and drive the Road to
-            Hana, then Kauai to go to a Luau and explore the garden isle and
-            finally Big Island to hike through the Volcano National Park and do
-            a Kona coffee tour. We can’t wait!
+            Your presence as a guest,
+            <br />
+            is all we request.
           </Paragraph>
           <Paragraph>
-            <a
-              href="https://prezola.com/wishlists/10270430/3663762"
-              target="_blank"
-            >
+            But if you insist on giving a gift, some pennies for
+            <br />
+            our honeymoon would really give us a lift
+          </Paragraph>
+          <Paragraph>
+            <a href="https://prezola.com/wishlists/10273773/" target="_blank">
               <Button onClick={() => {}}>
                 Go to our honeymoon page{" "}
                 <FontAwesomeIcon
