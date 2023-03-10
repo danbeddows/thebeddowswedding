@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guest {
+	id                Int     @id @default(autoincrement())
+	firstname         String 
+	lastname          String
+	phone             String
+	isSmsSent         Boolean @default(false)
+	hash              String  @unique
+	didViewPhotos     Boolean @default(false)
+	photos            Photo[]
+}
+
+model Photo {
+	id                Int      @id @default(autoincrement())
+  owner             Guest    @relation(fields: [ownerId], references: [id])
+	ownerId           Int 
+	hash              String   @unique
+	uploadTimestamp   DateTime
+	fileType          String
+	fileSize          Int
+	fileUrl           String
+	photoWidth        Int
+	photoHeight       Int
+	photoTimestamp    DateTime
+	isPendingApproval Boolean  @default(true)
+	isDeleted         Boolean  @default(false)
+	isVisible         Boolean  @default(false)
+}
