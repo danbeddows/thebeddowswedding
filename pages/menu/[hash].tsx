@@ -11,7 +11,7 @@ import {
   CourseSubtitle,
   CourseTitle,
   Error,
-  Guest,
+  Guest as GuestElement,
   GuestDecision,
   GuestDesktopDelete,
   GuestDiet,
@@ -25,13 +25,13 @@ import {
   MenuPage,
   Thankyou,
   MainTitle,
-} from "../src/styles/pages/menu.styles";
+} from "../../src/styles/pages/menu.styles";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { prisma } from "../../src/lib/prisma";
+import { getParties } from "src/lib/parties/getParties";
+import { Guest, Party, PartyGuest } from "@prisma/client";
 
-interface GuestChoice {
-  name: string;
-  dietReqs: string;
-  phone: string;
-  willAttend: string;
+interface GuestChoiceForm {
   nameRef?: React.RefObject<HTMLInputElement>;
   errors?: {
     nameError?: string;
@@ -41,13 +41,79 @@ interface GuestChoice {
   };
 }
 
+type GuestChoice = Guest & GuestChoiceForm;
+
 export type GuestChoiceWithoutForm = Omit<GuestChoice, "nameRef" | "errors">;
 
-const Menu = () => {
+interface PartyItem {
+  params: {
+    hash: string;
+  };
+}
+type PartyList = PartyItem[];
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const parties = await getParties();
+
+  const partyHashes: PartyList = parties.map((party) => {
+    return {
+      params: {
+        hash: party.hash,
+      },
+    };
+  });
+
+  return {
+    paths: partyHashes,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const hash = params?.hash as string;
+
+  const party = await prisma.party.findUnique({
+    where: {
+      hash: hash,
+    },
+    include: {
+      guests: {
+        orderBy: {
+          displayOrder: "asc",
+        },
+        include: {
+          guest: true,
+        },
+      },
+    },
+  });
+
+  if (party === null) {
+    return { notFound: true };
+  }
+
+  return {
+    props: { party },
+    revalidate: 600,
+  };
+};
+
+type PartyWithGuests = Party & {
+  guests: (PartyGuest & {
+    guest: Guest;
+  })[];
+};
+
+interface MenuProps {
+  party: PartyWithGuests;
+}
+const Menu = ({ party }: MenuProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
-  const [guestChoices, setGuestChoices] = useState<GuestChoice[]>([]);
+  const guests = party.guests.map((partyGuest) => partyGuest.guest);
+
+  const [guestChoices, setGuestChoices] = useState<GuestChoice[]>(guests);
   const [lastGuestCount, setLastGuestCount] = useState(0);
 
   const submitForm = () => {
@@ -275,16 +341,16 @@ const Menu = () => {
         <GuestHeader>
           <h2>Guests</h2>
         </GuestHeader>
-        <Guest isHeader key={-1}>
+        <GuestElement isHeader key={-1}>
           <div>Name</div>
           <div>Attending?</div>
           <div>Phone number</div>
           <div>Dietary requirements</div>
-        </Guest>
+        </GuestElement>
         {guestChoices.map((guestChoice, n) => (
           <>
             <GuestMobileTitle>Guest {n + 1}</GuestMobileTitle>
-            <Guest key={n}>
+            <GuestElement key={n}>
               <div>
                 <GuestMobileHeading>Name</GuestMobileHeading>
                 <GuestName
@@ -329,6 +395,7 @@ const Menu = () => {
               <div>
                 <GuestMobileHeading>Dietary requirements?</GuestMobileHeading>
                 <GuestDiet
+                  value={guestChoice.dietReqs}
                   placeholder="e.g vegeterian, gluten free, etc"
                   onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
                     updateGuestValue(n, "dietReqs", e?.currentTarget.value);
@@ -337,7 +404,7 @@ const Menu = () => {
                 ></GuestDiet>
                 <Error>{guestChoice.errors?.dietReqsError}</Error>
               </div>
-            </Guest>
+            </GuestElement>
           </>
         ))}
         <Button

@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guest {
+	id                Int          @id @default(autoincrement())
+	name              String       @default("")
+	phone             String
+	isSmsSent         Boolean      @default(false)
+	hash              String       @unique
+	parties           PartyGuest[]
+	dietReqs          String       @default("")
+	foodChoice        String       @default("")
+}
+
+model Party {
+	id                Int          @id @default(autoincrement())
+	hash              String       @unique
+	hasChosenMeals    Boolean      @default(false)
+	guests            PartyGuest[]
+}
+
+model PartyGuest {
+	party        Party  @relation(fields: [partyId], references: [id])
+	partyId      Int
+	guest        Guest @relation(fields: [guestId], references: [id])
+	guestId      Int
+	displayOrder Int
+	hash         String
+
+	@@id([partyId, guestId])
+}
