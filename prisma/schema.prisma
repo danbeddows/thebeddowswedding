@@ -18,7 +18,7 @@ model Guest {
 	hash              String       @unique
 	parties           PartyGuest[]
 	dietReqs          String       @default("")
-	foodChoice        String       @default("")
+	foodChoice        String       @default("-1")
 }
 
 model Party {

@@ -13,14 +13,10 @@ import {
   Error,
   Guest as GuestElement,
   GuestDecision,
-  GuestDesktopDelete,
   GuestDiet,
-  GuestHeader,
-  GuestMobileDelete,
   GuestMobileHeading,
   GuestMobileTitle,
   GuestName,
-  GuestPhone,
   MenuContainer,
   MenuPage,
   Thankyou,
@@ -36,8 +32,7 @@ interface GuestChoiceForm {
   errors?: {
     nameError?: string;
     dietReqsError?: string;
-    phoneError?: string;
-    willAttendError?: string;
+    foodChoiceError?: string;
   };
 }
 
@@ -114,7 +109,10 @@ const Menu = ({ party }: MenuProps) => {
   const guests = party.guests.map((partyGuest) => partyGuest.guest);
 
   const [guestChoices, setGuestChoices] = useState<GuestChoice[]>(guests);
-  const [lastGuestCount, setLastGuestCount] = useState(0);
+
+  if (party.hasChosenMeals && !formSubmitted) {
+    setFormSubmitted(true);
+  }
 
   const submitForm = () => {
     // Run through each guest and validate data
@@ -135,14 +133,14 @@ const Menu = ({ party }: MenuProps) => {
         updateGuestError(index, "nameError", "");
       }
 
-      if (guest.willAttend === "-1") {
-        updateGuestError(index, "willAttendError", "Select whether attending.");
+      if (guestChoice.foodChoice === "-1") {
+        updateGuestError(index, "foodChoiceError", "Choose main course.");
         hasError = true;
       } else {
-        updateGuestError(index, "willAttendError", "");
+        updateGuestError(index, "foodChoiceError", "");
       }
 
-      if (guest.dietReqs.length > 300) {
+      if (guestChoice.dietReqs.length > 300) {
         updateGuestError(
           index,
           "dietReqsError",
@@ -157,22 +155,13 @@ const Menu = ({ party }: MenuProps) => {
     if (!hasError) {
       setIsSubmitting(true);
 
-      const data = guestChoices.map((guestChoice) => {
-        return {
-          name: guest.name,
-          willAttend: guest.willAttend,
-          dietReqs: guest.dietReqs,
-          phone: guest.phone,
-        };
-      });
-
       fetch("/api/menu", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ guests: guestChoices, party }),
       })
         .then((response) => response.json())
         .then((response) => {
@@ -232,32 +221,11 @@ const Menu = ({ party }: MenuProps) => {
     );
   };
 
-  const getTurnoutMessage = () => {
-    const turnout =
-      guests.filter((guest) => guest.willAttend === "yes").length /
-      guests.length;
-
-    if (turnout === 1 && guests.length === 1) {
-      return "We can't wait to see you!";
-    } else if (turnout === 1 && guests.length === 2) {
-      return "We can't wait to see you both!";
-    } else if (turnout === 1 && guests.length > 2) {
-      return "We can't wait to see you all!";
-    }
-
-    if (turnout === 0) {
-      return "We're sorry you can't make it, thanks for letting us know.";
-    }
-
-    if (turnout < 1 && turnout > 0) {
-      return "Thanks for letting us know.";
-    }
-  };
-
   return (
     <MenuPage>
       <Section>
-        <PageHeading>Wedding breakfast</PageHeading>
+        <PageHeading>Menu</PageHeading>
+        <p>Please respond by the 24th March.</p>
       </Section>
       <Section>
         <MenuContainer>
@@ -326,25 +294,31 @@ const Menu = ({ party }: MenuProps) => {
               </CourseItem>
             </CourseBody>
           </Course>
+          <Course>
+            <CourseTitle>To Finish</CourseTitle>
+            <CourseBody>
+              <CourseItem>
+                Freshly Brewed Tea, Coffee & Tisanes + Handmade Petit Four
+              </CourseItem>
+            </CourseBody>
+          </Course>
         </MenuContainer>
       </Section>
 
       <Section>
         <Paragraph>
-          Please add the details of everyone in your party below.
+          Please select the main courses for everyone in your party below.
         </Paragraph>
         <Paragraph>
-          <span style={{ fontWeight: 600 }}>Note:</span> We're asking for the
-          mobile numbers of all adults so we can send you a link nearer the time
-          with our menu, and the wedding programme. No spam, we promise!
+          <span style={{ fontWeight: 600 }}>Note:</span> If you're concerned
+          about any of the ingredients that may be present in your meal, please
+          don't be; we will be forwarding all dietary requirements to the
+          caterers.
         </Paragraph>
-        <GuestHeader>
-          <h2>Guests</h2>
-        </GuestHeader>
+
         <GuestElement isHeader key={-1}>
           <div>Name</div>
-          <div>Attending?</div>
-          <div>Phone number</div>
+          <div>Main course</div>
           <div>Dietary requirements</div>
         </GuestElement>
         {guestChoices.map((guestChoice, n) => (
@@ -356,42 +330,28 @@ const Menu = ({ party }: MenuProps) => {
                 <GuestName
                   type="text"
                   value={guestChoice.name}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                    updateGuestValue(n, "name", e?.currentTarget.value);
-                  }}
-                  placeholder="Enter name"
                   ref={guestChoice.nameRef}
-                  disabled={isSubmitting}
+                  disabled={true}
                 />
                 <Error>{guestChoice.errors?.nameError}</Error>
               </div>
               <div>
-                <GuestMobileHeading>Attending?</GuestMobileHeading>
+                <GuestMobileHeading>Main course</GuestMobileHeading>
                 <GuestDecision
                   onChange={(e: React.FormEvent<HTMLSelectElement>) => {
-                    updateGuestValue(n, "willAttend", e?.currentTarget.value);
+                    updateGuestValue(n, "foodChoice", e?.currentTarget.value);
                   }}
-                  value={guestChoice.willAttend}
-                  disabled={isSubmitting}
+                  value={guestChoice.foodChoice}
+                  disabled={isSubmitting || formSubmitted}
                 >
                   <option value="-1">Please select</option>
-                  <option value="yes">Yes, can't wait!</option>
-                  <option value="no">Sorry, can't make it.</option>
+                  <option value="beef">Sticky Braised Beef</option>
+                  <option value="chicken">Chicken Supreme Risotto</option>
+                  <option value="veg">Butternut Squash Risotto</option>
                 </GuestDecision>
-                <Error>{guestChoice.errors?.willAttendError}</Error>
+                <Error>{guestChoice.errors?.foodChoiceError}</Error>
               </div>
-              <div>
-                <GuestMobileHeading>Phone number</GuestMobileHeading>
-                <GuestPhone
-                  value={guestChoice.phone}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                    updateGuestValue(n, "phone", e?.currentTarget.value);
-                  }}
-                  placeholder="Enter phone"
-                  disabled={isSubmitting}
-                />
-                <Error>{guestChoice.errors?.phoneError}</Error>
-              </div>
+
               <div>
                 <GuestMobileHeading>Dietary requirements?</GuestMobileHeading>
                 <GuestDiet
@@ -400,7 +360,7 @@ const Menu = ({ party }: MenuProps) => {
                   onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
                     updateGuestValue(n, "dietReqs", e?.currentTarget.value);
                   }}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || formSubmitted}
                 ></GuestDiet>
                 <Error>{guestChoice.errors?.dietReqsError}</Error>
               </div>
@@ -418,8 +378,10 @@ const Menu = ({ party }: MenuProps) => {
         </Button>
         {formSubmitted && (
           <Thankyou>
-            <Subheading>Thanks for your response</Subheading>
-            It's safely been delivered. {getTurnoutMessage()}
+            <Subheading>
+              Thanks for your choice{guestChoices.length > 1 ? "s" : ""}.
+            </Subheading>
+            We can't wait to see you soon!
           </Thankyou>
         )}
       </Section>
