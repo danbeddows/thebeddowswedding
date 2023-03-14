@@ -47,6 +47,7 @@ const Header = () => {
     { url: "/", label: "Home" },
     { url: "/venue", label: "Venue" },
     { url: "/travel", label: "Travel" },
+    { url: "/faq", label: "FAQ" },
     { url: "/rsvp", label: "RSVP" },
     { url: "/gifts", label: "Gifts" },
   ]);
