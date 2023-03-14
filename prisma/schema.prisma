@@ -26,6 +26,7 @@ model Party {
 	hash              String       @unique
 	hasChosenMeals    Boolean      @default(false)
 	guests            PartyGuest[]
+	internalLabel     String       @default("")
 }
 
 model PartyGuest {

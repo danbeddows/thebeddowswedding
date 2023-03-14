@@ -389,7 +389,7 @@ const Menu = ({ party }: MenuProps) => {
               <div>
                 <GuestMobileHeading>Dietary requirements?</GuestMobileHeading>
                 <GuestDiet
-                  value={guestChoice.dietReqs}
+                  value={guestChoice.dietReqs ? guestChoice.dietReqs : ""}
                   placeholder="e.g vegeterian, gluten free, etc"
                   onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
                     updateGuestValue(n, "dietReqs", e?.currentTarget.value);
