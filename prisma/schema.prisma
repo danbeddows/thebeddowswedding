@@ -13,12 +13,12 @@ datasource db {
 model Guest {
 	id                Int          @id @default(autoincrement())
 	name              String       @default("")
-	phone             String
+	phone             String?       
 	isSmsSent         Boolean      @default(false)
-	hash              String       @unique
 	parties           PartyGuest[]
-	dietReqs          String       @default("")
+	dietReqs          String?    
 	foodChoice        String       @default("-1")
+	isChild           Boolean      @default(false)
 }
 
 model Party {
@@ -34,7 +34,6 @@ model PartyGuest {
 	guest        Guest @relation(fields: [guestId], references: [id])
 	guestId      Int
 	displayOrder Int
-	hash         String
 
 	@@id([partyId, guestId])
 }

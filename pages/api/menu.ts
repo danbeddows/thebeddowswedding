@@ -45,7 +45,7 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
     // check guest exists on db
     const guestRow = prisma.guest.findUnique({
       where: {
-        hash: guest.hash,
+        id: guest.id,
       },
     });
 
