@@ -38,7 +38,7 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.json({ status: "failed" });
     }
 
-    if (guest.dietReqs === null || guest.dietReqs.length > 300) {
+    if (guest.dietReqs !== null && guest.dietReqs.length > 300) {
       return res.json({ status: "failed" });
     }
 

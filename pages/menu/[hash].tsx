@@ -143,7 +143,7 @@ const Menu = ({ party }: MenuProps) => {
         updateGuestError(index, "foodChoiceError", "");
       }
 
-      if (guestChoice.dietReqs === null || guestChoice.dietReqs.length > 300) {
+      if (guestChoice.dietReqs !== null && guestChoice.dietReqs.length > 300) {
         updateGuestError(
           index,
           "dietReqsError",
