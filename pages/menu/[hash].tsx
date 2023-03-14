@@ -228,12 +228,21 @@ const Menu = ({ party }: MenuProps) => {
     <MenuPage>
       <Section>
         <PageHeading>Menu</PageHeading>
-        <p>Please respond by the 24th March.</p>
-        <p style={{ display: partyHasKid ? "block" : "none" }}>
-          <span style={{ fontWeight: 500 }}>Note:</span> kids can choose either
-          the dedicated kids menu (see below), or a smaller portion of any adult
-          menu.
-        </p>
+        <Paragraph>
+          Please select the main courses for everyone in your party below by the
+          25th March.
+        </Paragraph>
+        <Paragraph>
+          If you're concerned about any of the ingredients that may be present
+          in your meal, please don't be; we will be forwarding all dietary
+          requirements to the caterers.
+        </Paragraph>
+        {partyHasKid && (
+          <Paragraph>
+            Kids can choose either the dedicated kids menu (see below), or a
+            smaller portion of any adult menu.
+          </Paragraph>
+        )}
       </Section>
       <Section>
         <MenuContainer>
@@ -326,16 +335,6 @@ const Menu = ({ party }: MenuProps) => {
       </Section>
 
       <Section>
-        <Paragraph>
-          Please select the main courses for everyone in your party below.
-        </Paragraph>
-        <Paragraph>
-          <span style={{ fontWeight: 600 }}>Note:</span> If you're concerned
-          about any of the ingredients that may be present in your meal, please
-          don't be; we will be forwarding all dietary requirements to the
-          caterers.
-        </Paragraph>
-
         <GuestElement isHeader key={-1}>
           <div>Name</div>
           <div>Main course</div>
