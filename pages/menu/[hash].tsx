@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { party },
-    revalidate: 600,
+    revalidate: false,
   };
 };
 
