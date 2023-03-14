@@ -108,6 +108,9 @@ const Menu = ({ party }: MenuProps) => {
 
   const guests = party.guests.map((partyGuest) => partyGuest.guest);
 
+  const partyHasKid: boolean =
+    guests.filter((guest) => guest.isChild).length > 0;
+
   const [guestChoices, setGuestChoices] = useState<GuestChoice[]>(guests);
 
   if (party.hasChosenMeals && !formSubmitted) {
@@ -226,6 +229,11 @@ const Menu = ({ party }: MenuProps) => {
       <Section>
         <PageHeading>Menu</PageHeading>
         <p>Please respond by the 24th March.</p>
+        <p style={{ display: partyHasKid ? "block" : "none" }}>
+          <span style={{ fontWeight: 500 }}>Note:</span> kids can choose either
+          the dedicated kids menu (see below), or a smaller portion of any adult
+          menu.
+        </p>
       </Section>
       <Section>
         <MenuContainer>
@@ -302,6 +310,18 @@ const Menu = ({ party }: MenuProps) => {
               </CourseItem>
             </CourseBody>
           </Course>
+          <Course style={{ display: partyHasKid ? "block" : "none" }}>
+            <CourseTitle>Kids menu</CourseTitle>
+            <CourseBody>
+              <CourseItem>Garlic Dough Balls + Herby Sour Cream Dip</CourseItem>
+              <CourseItem>
+                Chicken Goujons + Crispy Chips | Garden Peas | Heinz Ketchup
+              </CourseItem>
+              <CourseItem>
+                Chocolate Ice Cream Sundae + Marshmallows | Wafer
+              </CourseItem>
+            </CourseBody>
+          </Course>
         </MenuContainer>
       </Section>
 
@@ -345,9 +365,23 @@ const Menu = ({ party }: MenuProps) => {
                   disabled={isSubmitting || formSubmitted}
                 >
                   <option value="-1">Please select</option>
-                  <option value="beef">Sticky Braised Beef</option>
-                  <option value="chicken">Chicken Supreme Risotto</option>
-                  <option value="veg">Butternut Squash Risotto</option>
+                  {!guestChoice.isChild && (
+                    <>
+                      <option value="beef">Sticky Braised Beef</option>
+                      <option value="chicken">Chicken Supreme Risotto</option>
+                      <option value="veg">Butternut Squash Risotto</option>
+                    </>
+                  )}
+                  {guestChoice.isChild && (
+                    <>
+                      <option value="beef">Kids Menu</option>
+                      <option value="beef">Kids Sticky Braised Beef</option>
+                      <option value="chicken">
+                        Kids Chicken Supreme Risotto
+                      </option>
+                      <option value="veg">Kids Butternut Squash Risotto</option>
+                    </>
+                  )}
                 </GuestDecision>
                 <Error>{guestChoice.errors?.foodChoiceError}</Error>
               </div>

@@ -128,6 +128,8 @@ const formatMessage = (guests: Guest[]) => {
         ? "Cheshire Chicken Risotto"
         : "Butternut Squash Risotto"
     }</b></p><br/>`;
+
+    content += `<p>${guest.dietReqs}</p><br/><br/>`;
   });
 
   return `<html><body>${content}</body></html>`;
