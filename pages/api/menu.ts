@@ -33,30 +33,75 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json({ status: "failed" });
   }
 
-  guests.forEach((guest) => {
+  // Check party exists
+  const partyRow = await prisma.party.findUnique({
+    where: {
+      hash: party.hash,
+    },
+    include: {
+      guests: {
+        orderBy: {
+          displayOrder: "asc",
+        },
+        include: {
+          guest: true,
+        },
+      },
+    },
+  });
+
+  // Check party exists
+  if (partyRow === null) {
+    return res.json({ status: "failed" });
+  }
+
+  // Check party has guests
+  if (partyRow.guests.length === 0) {
+    return res.json({ status: "failed" });
+  }
+
+  // Check each guest exists in db, plus attached to party
+  let hasError = false;
+  for (const guest of guests) {
     if (guest.foodChoice === "-1") {
-      return res.json({ status: "failed" });
+      hasError = true;
+      return;
     }
 
     if (guest.dietReqs !== null && guest.dietReqs.length > 300) {
-      return res.json({ status: "failed" });
+      hasError = true;
+      return;
     }
 
     // check guest exists on db
-    const guestRow = prisma.guest.findUnique({
+    const guestRow = await prisma.guest.findUnique({
       where: {
         id: guest.id,
       },
     });
 
+    // Check guest exists on db
     if (guestRow === null) {
-      return res.json({ status: "failed" });
+      hasError = true;
+      return;
     }
-  });
 
-  // Check party exists
-  const partyRow = prisma.party.findUnique({ where: { hash: party.hash } });
-  if (partyRow === null) {
+    // Check that guest exists in party
+    let found = false;
+    for (const partyGuest of partyRow.guests) {
+      if (partyGuest.guest.id === guestRow.id) {
+        found = true;
+      }
+    }
+
+    if (!found) {
+      hasError = true;
+      return;
+    }
+  }
+
+  // If any guest had an error, exit
+  if (hasError) {
     return res.json({ status: "failed" });
   }
 
@@ -109,6 +154,9 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
   // Add arbitary thread pause, so the request doesn't
   // seem broken
   await sleep(600);
+
+  // bust cache
+  fetch(`https://www.thebeddowswedding.com/menu/${party.hash}`);
 
   res.json({
     status: "success",
