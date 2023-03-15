@@ -47,24 +47,7 @@ interface PartyItem {
 }
 type PartyList = PartyItem[];
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const parties = await getParties();
-
-  const partyHashes: PartyList = parties.map((party) => {
-    return {
-      params: {
-        hash: party.hash,
-      },
-    };
-  });
-
-  return {
-    paths: partyHashes,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetStaticProps = async ({ params }) => {
   const hash = params?.hash as string;
 
   const party = await prisma.party.findUnique({
@@ -89,7 +72,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { party },
-    revalidate: 10,
   };
 };
 
@@ -341,7 +323,7 @@ const Menu = ({ party }: MenuProps) => {
           <div>Dietary requirements</div>
         </GuestElement>
         {guestChoices.map((guestChoice, n) => (
-          <>
+          <React.Fragment key={n}>
             <GuestMobileTitle>Guest {n + 1}</GuestMobileTitle>
             <GuestElement key={n}>
               <div>
@@ -398,7 +380,7 @@ const Menu = ({ party }: MenuProps) => {
                 <Error>{guestChoice.errors?.dietReqsError}</Error>
               </div>
             </GuestElement>
-          </>
+          </React.Fragment>
         ))}
         <Button
           onClick={() => {

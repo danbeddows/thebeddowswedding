@@ -151,13 +151,6 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.json({ status: "failed" });
     });
 
-  // Add arbitary thread pause, so the request doesn't
-  // seem broken
-  await sleep(600);
-
-  // bust cache
-  fetch(`https://www.thebeddowswedding.com/menu/${party.hash}`);
-
   res.json({
     status: "success",
   });
