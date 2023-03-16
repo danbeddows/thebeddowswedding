@@ -348,11 +348,13 @@ const Menu = ({ party }: MenuProps) => {
                   {guestChoice.isChild && (
                     <>
                       <option value="kids">Kids Menu</option>
-                      <option value="beef">Kids Sticky Braised Beef</option>
-                      <option value="chicken">
+                      <option value="kidsbeef">Kids Sticky Braised Beef</option>
+                      <option value="kidschicken">
                         Kids Chicken Supreme Risotto
                       </option>
-                      <option value="veg">Kids Butternut Squash Risotto</option>
+                      <option value="kidsveg">
+                        Kids Butternut Squash Risotto
+                      </option>
                     </>
                   )}
                 </GuestDecision>
