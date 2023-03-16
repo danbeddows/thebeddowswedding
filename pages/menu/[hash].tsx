@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "src/components/Button";
 import PageHeading from "src/components/PageHeading/PageHeading";
 import Paragraph from "src/components/Paragraph";
@@ -22,9 +22,8 @@ import {
   Thankyou,
   MainTitle,
 } from "../../src/styles/pages/menu.styles";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import { prisma } from "../../src/lib/prisma";
-import { getParties } from "src/lib/parties/getParties";
 import { Guest, Party, PartyGuest } from "@prisma/client";
 
 interface GuestChoiceForm {
@@ -39,13 +38,6 @@ interface GuestChoiceForm {
 type GuestChoice = Guest & GuestChoiceForm;
 
 export type GuestChoiceWithoutForm = Omit<GuestChoice, "nameRef" | "errors">;
-
-interface PartyItem {
-  params: {
-    hash: string;
-  };
-}
-type PartyList = PartyItem[];
 
 export const getServerSideProps: GetStaticProps = async ({ params }) => {
   const hash = params?.hash as string;
@@ -355,7 +347,7 @@ const Menu = ({ party }: MenuProps) => {
                   )}
                   {guestChoice.isChild && (
                     <>
-                      <option value="beef">Kids Menu</option>
+                      <option value="kids">Kids Menu</option>
                       <option value="beef">Kids Sticky Braised Beef</option>
                       <option value="chicken">
                         Kids Chicken Supreme Risotto
