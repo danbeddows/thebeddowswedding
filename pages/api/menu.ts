@@ -106,12 +106,12 @@ const handleMenuForm = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // All good - update records
-  guests.forEach(async (guest, index) => {
+  for (const guest of guests) {
     await prisma.guest.update({
       where: { id: guest.id },
       data: { foodChoice: guest.foodChoice, dietReqs: guest.dietReqs },
     });
-  });
+  }
 
   await prisma.party.update({
     where: { id: party.id },
