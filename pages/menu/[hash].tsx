@@ -204,7 +204,7 @@ const Menu = ({ party }: MenuProps) => {
         <PageHeading>Menu</PageHeading>
         <Paragraph>
           Please select the main courses for everyone in your party below by the
-          25th March.
+          27th March.
         </Paragraph>
         <Paragraph>
           If you're concerned about any of the ingredients that may be present
