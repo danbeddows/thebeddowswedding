@@ -203,8 +203,15 @@ const Menu = ({ party }: MenuProps) => {
       <Section>
         <PageHeading>Menu</PageHeading>
         <Paragraph>
-          Please select the main courses for everyone in your party below by the
-          27th March.
+          {guestChoices.length > 1 && (
+            <>
+              Please select the main courses for everyone in your party below by
+              the 27th March.
+            </>
+          )}
+          {guestChoices.length == 1 && (
+            <>Please select your main course by the 27th March.</>
+          )}
         </Paragraph>
         <Paragraph>
           If you're concerned about any of the ingredients that may be present
