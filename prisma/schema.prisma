@@ -11,14 +11,33 @@ datasource db {
 }
 
 model Guest {
-	id                Int     @id @default(autoincrement())
-	firstname         String 
-	lastname          String
-	phone             String
-	isSmsSent         Boolean @default(false)
-	hash              String  @unique
-	didViewPhotos     Boolean @default(false)
+	id                Int          @id @default(autoincrement())
+	name              String       @default("")
+	phone             String?       
+	isSmsSent         Boolean      @default(false)
+	parties           PartyGuest[]
+	dietReqs          String?    
+	foodChoice        String       @default("-1")
+	isChild           Boolean      @default(false)
 	photos            Photo[]
+}
+
+model Party {
+	id                Int          @id @default(autoincrement())
+	hash              String       @unique
+	hasChosenMeals    Boolean      @default(false)
+	guests            PartyGuest[]
+	internalLabel     String       @default("")
+}
+
+model PartyGuest {
+	party        Party  @relation(fields: [partyId], references: [id])
+	partyId      Int
+	guest        Guest @relation(fields: [guestId], references: [id])
+	guestId      Int
+	displayOrder Int
+
+	@@id([partyId, guestId])
 }
 
 model Photo {
