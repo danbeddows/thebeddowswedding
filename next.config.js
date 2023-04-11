@@ -28,7 +28,6 @@ module.exports = {
         permanent: false,
         basePath: false,
       },
-      ,
       {
         source: "/spotify",
         destination:
