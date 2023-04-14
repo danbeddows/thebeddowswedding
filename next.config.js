@@ -21,6 +21,20 @@ module.exports = {
         permanent: false,
         basePath: false,
       },
+      {
+        source: "/apple-music",
+        destination:
+          "https://music.apple.com/gb/playlist/the-one-with-the-wedding/pl.u-ajjDu0Aq56",
+        permanent: false,
+        basePath: false,
+      },
+      {
+        source: "/spotify",
+        destination:
+          "https://open.spotify.com/playlist/5Gtxp0pORR3cfQw8bfRuSV?si=83b7e602a6174206",
+        permanent: false,
+        basePath: false,
+      },
     ];
   },
 };
