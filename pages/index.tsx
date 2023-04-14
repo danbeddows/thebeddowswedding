@@ -15,7 +15,9 @@ const Index = () => {
   if (numDays == 0) {
     message = "The wedding is TODAY!";
   } else if (numDays < 0) {
-    message = `${-numDays} ${-numDays > 1 ? "days" : "day"} since the wedding`;
+    message = `${-numDays} ${
+      -numDays > 1 ? "days" : "day"
+    } since we got married`;
   }
 
   return (
