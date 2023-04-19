@@ -20,6 +20,7 @@ model Guest {
 	foodChoice        String       @default("-1")
 	isChild           Boolean      @default(false)
 	photos            Photo[]
+	hash              String
 }
 
 model Party {
@@ -42,7 +43,7 @@ model PartyGuest {
 
 model Photo {
 	id                Int      @id @default(autoincrement())
-  owner             Guest    @relation(fields: [ownerId], references: [id])
+	owner             Guest    @relation(fields: [ownerId], references: [id])
 	ownerId           Int 
 	hash              String   @unique
 	uploadTimestamp   DateTime
@@ -54,5 +55,5 @@ model Photo {
 	photoTimestamp    DateTime
 	isPendingApproval Boolean  @default(true)
 	isDeleted         Boolean  @default(false)
-	isVisible         Boolean  @default(false)
+	isFeatured        Boolean  @default(false)
 }
